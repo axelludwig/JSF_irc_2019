@@ -1,15 +1,23 @@
-var app = require('express')();
-var http = require('http').createServer(app);
-var io = require('socket.io')(http);
+let express = require('express')
+let app = express();
 
-app.get('/', function(req, res){
-  res.sendFile(__dirname + '/index.html');
+let http = require('http');
+let server = http.Server(app);
+
+let socketIO = require('socket.io');
+let io = socketIO(server);
+
+const port = process.env.PORT || 3000;
+
+io.on('connection', (socket) => {
+    console.log(socket)
+    console.log('user connected');
+
+    socket.on('new-message', (message) => {
+        io.emit('new-message', message)
+    });
 });
 
-io.on('connection', function(socket){
-  console.log('a user connected');
-});
-
-http.listen(3000, function(){
-  console.log('listening on *:3000');
+server.listen(port, () => {
+    console.log(`started on port: ${port}`);
 });
