@@ -10,6 +10,8 @@ export class AppComponent {
   message: string;
   messages: string[] = [];
   title: string = "chat";
+  username: string;
+
   constructor(private chatService: ChatService) {
   }
 
@@ -31,7 +33,7 @@ export class AppComponent {
   }
 
   saveUsername(username) {
-    //do stuff
+    this.chatService.saveUsername(username)
   }
 
   ngOnInit() {
@@ -42,5 +44,3 @@ export class AppComponent {
       });
   }
 }
-
-// TypeError: this.socket.join is not a function

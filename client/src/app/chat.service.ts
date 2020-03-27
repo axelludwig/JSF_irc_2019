@@ -13,14 +13,18 @@ export class ChatService {
         this.socket.emit('new-message', message);
     }
 
-    public createRoom(roomname)  {
+    public createRoom(roomname) {
         this.socket.emit('createRoom', roomname);
+    }
+
+    public saveUsername(username) {
+        this.socket.emit('saveUsername', username)
     }
 
     public joinRoom() {
 
         this.socket.emit('test1');
-        
+
         // this.socket.join('some room', () => {
         //     console.log("connected")
         // });

@@ -13,7 +13,7 @@ module.exports = class UserController {
 
 
 
-  createUser(name) {
+  saveUsername(name) {
     let res = new User(name)
     this.list.push(res)
     return res
