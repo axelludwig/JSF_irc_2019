@@ -3,6 +3,10 @@
   <div *ngFor="let message of messages">
     {{message}}
   </div>
+  <div>    
+  <!-- <input type="text" [(ngModel)]="username" name="username">
+  <button (click)="saveUsername(username)"> save username </button> -->
+  </div>
 <div class="form">
   <input [(ngModel)]="message" (keyup)="$event.keyCode == 13 && sendMessage()" />
   <button (click)="sendMessage()">Send</button>
