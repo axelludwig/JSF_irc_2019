@@ -1,0 +1,16 @@
+<div class="chat">
+    <div *ngFor="let message of messages">
+      {{message}}
+    </div>
+    <div>    
+   
+    </div>
+  <div class="form">
+    <input [(ngModel)]="message" (keyup)="$event.keyCode == 13 && sendMessage()" />
+    <button (click)="sendMessage()">Send</button>
+    <button (click)="test()"> test button </button>
+    <button (click)="test2()"> test2 button </button>
+    <button (click)="createRoom('room1')"> create room </button>
+  
+  </div>
+</div>
