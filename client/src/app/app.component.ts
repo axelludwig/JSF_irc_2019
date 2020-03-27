@@ -7,24 +7,14 @@ import { ChatService } from './chat.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-<<<<<<< HEAD
-  message: string;
-  messages: string[] = [];
-  title: string = "chat";
   username: string;
-
-=======
-  username: string;
+  title = "chat"; 
   
->>>>>>> peng
   constructor(private chatService: ChatService) {
   }
 
  
   saveUsername(username) {
-<<<<<<< HEAD
-    this.chatService.saveUsername(username)
-=======
     if(username == "")
     {
       alert("a name pls")
@@ -33,7 +23,6 @@ export class AppComponent {
       this.username = username;
       console.log(this.username);
     }
->>>>>>> peng
   }
 
   ngOnInit() {
