@@ -11,6 +11,8 @@ module.exports = class UserController {
     }
   }
 
+
+
   createUser(name) {
     let res = new User(name)
     this.list.push(res)
@@ -18,8 +20,14 @@ module.exports = class UserController {
   }
 
 
-  deleteUser() {
-
+  deleteUser(name) {
+    if (this.list.length < 1) {
+      console.log('there\'s no users');
+      return;
+    } let pos = this.list.indexOf(name);
+    if (null == pos) {
+      console.log(name + ' doesn\'t exist');
+    } this.list.splice(pos, 1);
   }
 
   toJSON() {

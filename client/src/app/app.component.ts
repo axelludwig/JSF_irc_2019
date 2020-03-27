@@ -30,6 +30,10 @@ export class AppComponent {
     this.chatService.test2();
   }
 
+  saveUsername(username) {
+    //do stuff
+  }
+
   ngOnInit() {
     this.chatService
       .getMessages()
