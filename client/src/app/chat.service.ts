@@ -13,6 +13,27 @@ export class ChatService {
         this.socket.emit('new-message', message);
     }
 
+    public createRoom(roomname)  {
+        this.socket.emit('createRoom', roomname);
+    }
+
+    public joinRoom() {
+
+        this.socket.emit('test1');
+        
+        // this.socket.join('some room', () => {
+        //     console.log("connected")
+        // });
+
+        // io.on('connection', function(socket){
+        //     socket.join('some room');
+        //   });
+    }
+
+    public test2() {
+        this.socket.emit('test2');
+    }
+
     public getMessages = () => {
         return Observable.create((observer) => {
             this.socket.on('new-message', (message) => {

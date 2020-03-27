@@ -18,6 +18,18 @@ export class AppComponent {
     this.message = '';
   }
 
+  createRoom(roomname) {
+    this.chatService.createRoom(roomname)
+  }
+
+  test() {
+    this.chatService.joinRoom();
+  }
+
+  test2() {
+    this.chatService.test2();
+  }
+
   ngOnInit() {
     this.chatService
       .getMessages()
@@ -26,3 +38,5 @@ export class AppComponent {
       });
   }
 }
+
+// TypeError: this.socket.join is not a function
