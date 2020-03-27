@@ -7,40 +7,36 @@ import { ChatService } from './chat.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+<<<<<<< HEAD
   message: string;
   messages: string[] = [];
   title: string = "chat";
   username: string;
 
+=======
+  username: string;
+  
+>>>>>>> peng
   constructor(private chatService: ChatService) {
   }
 
-  sendMessage() {
-    this.chatService.sendMessage(this.message);
-    this.message = '';
-  }
-
-  createRoom(roomname) {
-    this.chatService.createRoom(roomname)
-  }
-
-  test() {
-    this.chatService.joinRoom();
-  }
-
-  test2() {
-    this.chatService.test2();
-  }
-
+ 
   saveUsername(username) {
+<<<<<<< HEAD
     this.chatService.saveUsername(username)
+=======
+    if(username == "")
+    {
+      alert("a name pls")
+    }
+    else{
+      this.username = username;
+      console.log(this.username);
+    }
+>>>>>>> peng
   }
 
   ngOnInit() {
-    this.chatService
-      .getMessages()
-      .subscribe((message: string) => {
-        this.messages.push(message);
-      });
+    
   }
 }
