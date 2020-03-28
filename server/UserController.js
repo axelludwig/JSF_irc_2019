@@ -11,6 +11,13 @@ module.exports = class UserController {
     }
   }
 
+  usernameIsAvailable(username) {
+    var res = true;
+    this.list.map((user) => {
+      if (username == user.getName()) { res = false; }
+    })
+    return res;
+  }
 
 
   saveUsername(name) {

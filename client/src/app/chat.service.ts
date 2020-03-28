@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 
 export class ChatService {
     private url = 'http://localhost:3000';
-    private socket;
+    public socket;
 
     constructor() {
         this.socket = io(this.url);
@@ -22,12 +22,14 @@ export class ChatService {
     }
 
     public testUsername() {
-        
+
     }
 
     public joinRoom() {
 
-        this.socket.emit('test1');
+
+
+        // this.socket.emit('test1');
 
         // this.socket.join('some room', () => {
         //     console.log("connected")
@@ -39,8 +41,11 @@ export class ChatService {
     }
 
     public test2() {
-        var t = this.socket.emit('getUsers');
-        console.log();
+        this.socket.emit('usernameIsAvailable');
+        this.socket.on('usernameIsAvailableResponse', (bool) => {
+            console.log(bool)
+        })
+        // var t = this.socket.emit('getUsers');
     }
 
     public getMessages = () => {
