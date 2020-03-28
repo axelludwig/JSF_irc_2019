@@ -5,6 +5,8 @@ export class ChatService {
     private url = 'http://localhost:3000';
     public socket;
 
+    public isAvailable = false;
+
     constructor() {
         this.socket = io(this.url);
     }
@@ -25,6 +27,16 @@ export class ChatService {
 
     }
 
+    isAvailableUsername(username) {
+        this.socket.emit('usernameIsAvailable', username);
+        this.socket.on('usernameIsAvailableResponse', (boolean) => {
+            this.isAvailable = boolean
+        })
+    }
+
+
+
+
     public joinRoom() {
 
 
@@ -41,11 +53,7 @@ export class ChatService {
     }
 
     public test2() {
-        this.socket.emit('usernameIsAvailable');
-        this.socket.on('usernameIsAvailableResponse', (bool) => {
-            console.log(bool)
-        })
-        // var t = this.socket.emit('getUsers');
+
     }
 
     public getMessages = () => {

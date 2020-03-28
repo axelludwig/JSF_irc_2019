@@ -18,16 +18,16 @@ export class AppComponent {
 		if (username == "") {
 			alert("choose a username")
 		} else {
-			this.chatService.socket.emit('usernameIsAvailable', username);
-			this.chatService.socket.on('usernameIsAvailableResponse', (boolean) => {
-				if (boolean.toString() == 'true') {
-					console.log('dfkdfkj')
+			setTimeout(() => {
+				// res = boolean;
+				this.chatService.isAvailableUsername(username);
+				if (this.chatService.isAvailable) {
 					this.username = username;
 					this.chatService.saveUsername(username)
 				} else {
 					alert("this username is already taken")
 				}
-			})
+			}, 100);
 		}
 	}
 

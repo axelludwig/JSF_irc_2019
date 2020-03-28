@@ -20,8 +20,16 @@ export class ChatComponent implements OnInit {
   }
 
   createRoom(roomname) {
-  this.chatService.createRoom(roomname);
-}
+    this.chatService.createRoom(roomname);
+  }
+
+  foo(username) {
+    this.chatService.socket.emit('usernameIsAvailable', username);
+    this.chatService.socket.on('usernameIsAvailableResponse', (boolean) => {
+
+    })
+  }
+
 
   test() {
     this.chatService.joinRoom();
