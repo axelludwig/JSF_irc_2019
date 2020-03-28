@@ -7,4 +7,10 @@
 <ng-template #elseBlock>
   <input #name type="text"  >
   <button (click)="saveUsername(name.value)"> save username </button>
+
+  <ul>
+    <li *ngFor="let user of users">
+      {{user.name}}
+    </li>
+  </ul>
 </ng-template>
