@@ -9,7 +9,7 @@ var Room = require('./Room.js');
 var UserController = require('./UserController.js')
 
 var users = new UserController();
-var rooms = [];
+var rooms = ["room1", "room2"];
 
 const port = process.env.PORT || 3000;
 
@@ -45,9 +45,6 @@ io.on('connection', (socket) => {
 		console.log('room ' + roomname + ' was created')
 	})
 
-	socket.on('getRooms', () => {
-
-	})
 
 	socket.on('new-message', (message) => {
 		io.emit('new-message', message)
