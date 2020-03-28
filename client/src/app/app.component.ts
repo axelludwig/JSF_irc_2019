@@ -31,6 +31,12 @@ export class AppComponent {
 		}
 	}
 
+	getUsers(){
+		
+		this.chatService.getUsers();
+
+	}
+
 	ngOnInit() {
 
 	}
