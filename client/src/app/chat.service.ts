@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 export class ChatService {
     private url = 'http://localhost:3000';
     public socket;
-    public us:[];
+    public users: [];
     public isAvailable = false;
 
     constructor() {
@@ -23,10 +23,10 @@ export class ChatService {
         this.socket.emit('saveUsername', username)
     }
 
-    public getUsers(){
-        this.socket.emit('getUsers');
+    public getUsers() {
+        this.socket.emit('getConnectedUsers');
         this.socket.on('getUsersResponse', (users) => {
-            this.us = users;
+            this.users = users;
         });
     }
     public testUsername() {

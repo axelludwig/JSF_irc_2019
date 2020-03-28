@@ -11,6 +11,9 @@ var UserController = require('./UserController.js')
 var users = new UserController();
 var rooms = ["room1", "room2"];
 
+users.saveUsername('axel');
+users.saveUsername('peng');
+
 const port = process.env.PORT || 3000;
 
 io.on('connection', (socket) => {
@@ -18,7 +21,7 @@ io.on('connection', (socket) => {
 
 	socket.on('getConnectedUsers', () => {
 		console.log(users.toJSON())
-		socket.emit('getUsersResponse', users.toJSON())
+		socket.emit('getUsersResponse', users.list)
 	})
 
 	socket.on('usernameIsAvailable', (username) => {

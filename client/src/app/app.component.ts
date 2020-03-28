@@ -30,13 +30,16 @@ export class AppComponent {
 		}
 	}
 
-	getUsers(){
-		
+	getUsers() {
+
 		this.chatService.getUsers();
+		setTimeout(() => {
+			console.log(this.chatService.users)
+		}, 500);
 
 	}
 
 	ngOnInit() {
-
+		this.getUsers();
 	}
 }
