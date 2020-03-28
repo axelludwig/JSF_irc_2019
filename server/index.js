@@ -13,13 +13,18 @@ var rooms = [];
 
 const port = process.env.PORT || 3000;
 
+// debug
+users.saveUsername('axel');
+users.saveUsername('peng');
+users.saveUsername('quentin');
+
 io.on('connection', (socket) => {
-  // socket.join('some room');
-  // console.log(socket)
   console.log('user connected');
 
   socket.on('getUsers', () => {
-    socket.emit("dfdf")
+    console.log('getUsers')
+    socket.emit('getUsersResponse', users.toJSON())
+    // return users.toJSON();
   })
 
   socket.on('saveUsername', (username) => {
@@ -40,7 +45,7 @@ io.on('connection', (socket) => {
     console.log(users.toJSON());
     var r = new Room(roomname);
     rooms.push(r);
-    console.log('room ' + roomname + ' was created') 
+    console.log('room ' + roomname + ' was created')
     // var u = users.createUser('axel');
     // var v = users.createUser('peng');
     // var w = users.createUser('quentin');
@@ -73,6 +78,10 @@ io.on('connection', (socket) => {
     io.emit('new-message', message)
   });
 });
+
+app.get('/', function (req, res) {
+  res.send('there\'s no api')
+})
 
 server.listen(port, () => {
   console.log(`started on port: ${port}`);
