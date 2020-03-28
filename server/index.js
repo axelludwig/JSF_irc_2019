@@ -8,29 +8,36 @@ let io = socketIO(server);
 var Room = require('./Room.js');
 var UserController = require('./UserController.js')
 
-var users = new UserController();
+var usersController = new UserController();
 var rooms = ["room1", "room2"];
 
-users.saveUsername('axel');
-users.saveUsername('peng');
+usersController.saveUsername('axel');
+usersController.saveUsername('peng');
 
 const port = process.env.PORT || 3000;
 
 io.on('connection', (socket) => {
+	var user;
+
 	console.log('socket connection starts');
 
+	socket.on('saveUsername', (username) => {
+		user = usersController.saveUsername(username);
+		console.log('user ' + username + ' connected');
+	})
+
+	socket.on('disconnect', (reason) => {
+		if ('transport close' == reason) console.log('the user left')
+		if (null != user) usersController.deleteUser(user.getName());
+		console.log('')
+	});
+
 	socket.on('getConnectedUsers', () => {
-		console.log(users.toJSON())
-		socket.emit('getUsersResponse', users.list)
+		socket.emit('getUsersResponse', usersController.list)
 	})
 
 	socket.on('usernameIsAvailable', (username) => {
-		socket.emit('usernameIsAvailableResponse', users.usernameIsAvailable(username))
-	})
-
-	socket.on('saveUsername', (username) => {
-		var u = users.saveUsername(username);
-		console.log('user ' + username + ' connected');
+		socket.emit('usernameIsAvailableResponse', usersController.usernameIsAvailable(username))
 	})
 
 	socket.on('roomnameIsAvailable', (name) => {
@@ -42,7 +49,6 @@ io.on('connection', (socket) => {
 	})
 
 	socket.on('createRoom', (roomname) => {
-		console.log(users.toJSON());
 		var r = new Room(roomname);
 		rooms.push(r);
 		console.log('room ' + roomname + ' was created')
@@ -55,12 +61,9 @@ io.on('connection', (socket) => {
 });
 
 app.get('/', function (req, res) {
-	var datetime = new Date();
-	console.log(datetime);
-	console.log(users.toJSON());
-	res.send('there\'s no api')
+	res.json(usersController.list)
 })
 
 server.listen(port, () => {
-	console.log(`started on port: ${port}`);
+	console.log(`started on port: ${port} \n`);
 });
