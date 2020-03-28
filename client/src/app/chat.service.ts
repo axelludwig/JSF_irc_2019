@@ -21,6 +21,10 @@ export class ChatService {
         this.socket.emit('saveUsername', username)
     }
 
+    public testUsername() {
+        
+    }
+
     public joinRoom() {
 
         this.socket.emit('test1');
@@ -35,7 +39,8 @@ export class ChatService {
     }
 
     public test2() {
-        this.socket.emit('test2');
+        var t = this.socket.emit('getUsers');
+        console.log();
     }
 
     public getMessages = () => {
@@ -43,6 +48,9 @@ export class ChatService {
             this.socket.on('new-message', (message) => {
                 observer.next(message);
             });
+            this.socket.on('getUsersResponse', (users) => {
+                console.log(users)
+            })
         });
     }
 }
