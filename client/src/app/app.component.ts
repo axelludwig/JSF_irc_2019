@@ -9,6 +9,7 @@ import { ChatService } from './chat.service';
 export class AppComponent {
 	username: string;
 	title = "chat";
+	users:[]
 
 	constructor(private chatService: ChatService) {
 	}
@@ -34,7 +35,8 @@ export class AppComponent {
 
 		this.chatService.getUsers();
 		setTimeout(() => {
-			console.log(this.chatService.users)
+			this.users = this.chatService.users;
+			console.log(this.users)
 		}, 500);
 
 	}
