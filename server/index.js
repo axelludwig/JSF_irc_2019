@@ -13,15 +13,10 @@ var rooms = [];
 
 const port = process.env.PORT || 3000;
 
-// debug
-users.saveUsername('axel');
-users.saveUsername('peng');
-users.saveUsername('quentin');
-
 io.on('connection', (socket) => {
-	console.log('user connected');
+	console.log('socket connection starts');
 
-	socket.on('getUsers', () => {
+	socket.on('getConnectedUsers', () => {
 		console.log(users.toJSON())
 		socket.emit('getUsersResponse', users.toJSON())
 	})
@@ -32,14 +27,15 @@ io.on('connection', (socket) => {
 
 	socket.on('saveUsername', (username) => {
 		var u = users.saveUsername(username);
-		console.log(u)
+		console.log('user ' + username + ' connected');
 	})
 
-	// pour tester si le pseudo est disponible ou déjà utilisé
-
-
 	socket.on('roomnameIsAvailable', (name) => {
-
+		var res = rooms;
+		this.list.map((room) => {
+			if (name == room.getName()) { res = false; }
+		})
+		return res;
 	})
 
 	socket.on('createRoom', (roomname) => {
@@ -47,28 +43,6 @@ io.on('connection', (socket) => {
 		var r = new Room(roomname);
 		rooms.push(r);
 		console.log('room ' + roomname + ' was created')
-		// var u = users.createUser('axel');
-		// var v = users.createUser('peng');
-		// var w = users.createUser('quentin');
-		// r.addUser(u);
-		// r.addUser(v);
-		// r.addUser(w);
-
-		// console.log(r.toJSON())
-		// r.removeUser('quentin');
-		// console.log(r.toJSON())
-		// console.log("salut")
-
-		// console.log(r.get)
-
-
-		// rooms[0].addUser('peng', 1)
-		// rooms[0].addUser('axel', 2)
-		// rooms[0].toString()
-		// rooms[0].removeUser('axel')
-		// console.log('room ' + rooms[0].getName() + ' created')
-		// console.log(rooms[0].getUserCount())
-		// rooms.push(r)
 	})
 
 	socket.on('getRooms', () => {

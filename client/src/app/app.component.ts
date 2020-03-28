@@ -18,9 +18,8 @@ export class AppComponent {
 		if (username == "") {
 			alert("choose a username")
 		} else {
+			this.chatService.isAvailableUsername(username);
 			setTimeout(() => {
-				// res = boolean;
-				this.chatService.isAvailableUsername(username);
 				if (this.chatService.isAvailable) {
 					this.username = username;
 					this.chatService.saveUsername(username)
