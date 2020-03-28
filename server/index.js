@@ -17,9 +17,8 @@ usersController.saveUsername('peng');
 const port = process.env.PORT || 3000;
 
 io.on('connection', (socket) => {
-	var user;
-
 	console.log('socket connection starts');
+	var user;
 
 	socket.on('saveUsername', (username) => {
 		user = usersController.saveUsername(username);
@@ -32,6 +31,9 @@ io.on('connection', (socket) => {
 		console.log('')
 	});
 
+	//==================================================\\
+	//user management
+
 	socket.on('getConnectedUsers', () => {
 		socket.emit('getUsersResponse', usersController.list)
 	})
@@ -39,6 +41,9 @@ io.on('connection', (socket) => {
 	socket.on('usernameIsAvailable', (username) => {
 		socket.emit('usernameIsAvailableResponse', usersController.usernameIsAvailable(username))
 	})
+
+	//==================================================\\
+	//room management
 
 	socket.on('roomnameIsAvailable', (name) => {
 		var res = rooms;
@@ -53,6 +58,9 @@ io.on('connection', (socket) => {
 		rooms.push(r);
 		console.log('room ' + roomname + ' was created')
 	})
+
+	//==================================================\\
+	//messages management
 
 
 	socket.on('new-message', (message) => {
