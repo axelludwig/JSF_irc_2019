@@ -47,15 +47,6 @@ export class ChatService {
 
 
 
-        // this.socket.emit('test1');
-
-        // this.socket.join('some room', () => {
-        //     console.log("connected")
-        // });
-
-        // io.on('connection', function(socket){
-        //     socket.join('some room');
-        //   });
     }
 
     public test2() {
@@ -67,7 +58,7 @@ export class ChatService {
             this.socket.on('new-message', (message) => {
                 observer.next(message);
             });
-            this.socket.on('getUsersResponse', (users) => {
+            this.socket.on('getConnectedUsers', (users) => {
                 console.log(users)
             })
         });
