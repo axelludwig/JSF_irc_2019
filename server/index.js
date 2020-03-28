@@ -9,7 +9,7 @@ var Room = require('./Room.js');
 var UserController = require('./UserController.js')
 
 var users = new UserController();
-var rooms = [];
+var rooms = ["room1", "room2"];
 
 const port = process.env.PORT || 3000;
 
@@ -22,8 +22,8 @@ io.on('connection', (socket) => {
 	console.log('user connected');
 
 	socket.on('getUsers', () => {
-		console.log(users.toJSON())
-		socket.emit('getUsersResponse', users.toJSON())
+		console.log(users.list)
+		socket.emit('getUsersResponse', users.list)
 	})
 
 	socket.on('usernameIsAvailable', (username) => {
@@ -37,6 +37,9 @@ io.on('connection', (socket) => {
 
 	// pour tester si le pseudo est disponible ou déjà utilisé
 
+	socket.on('getRooms',() =>{
+		socket.emit('roomList',rooms);
+	})
 
 	socket.on('roomnameIsAvailable', (name) => {
 
@@ -71,9 +74,6 @@ io.on('connection', (socket) => {
 		// rooms.push(r)
 	})
 
-	socket.on('getRooms', () => {
-
-	})
 
 	socket.on('new-message', (message) => {
 		io.emit('new-message', message)
