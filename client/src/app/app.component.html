@@ -4,8 +4,8 @@
     {{message}}
   </div>
   <div>    
-  <!-- <input type="text" [(ngModel)]="username" name="username">
-  <button (click)="saveUsername(username)"> save username </button> -->
+  <input type="text" [(ngModel)]="username" name="username">
+  <button (click)="saveUsername(username)"> save username </button>
   </div>
 <div class="form">
   <input [(ngModel)]="message" (keyup)="$event.keyCode == 13 && sendMessage()" />
