@@ -9,8 +9,14 @@ var Room = require('./Room.js');
 var UserController = require('./UserController.js')
 
 var usersController = new UserController();
-var rooms = ["room1", "room2"];
 
+//debug
+var rooms = [];
+var r = new Room('room1');
+rooms.push(r);
+r = new Room('room2');
+rooms.push(r);
+console.log(rooms)
 usersController.saveUsername('axel');
 usersController.saveUsername('peng');
 
@@ -26,9 +32,10 @@ io.on('connection', (socket) => {
 	})
 
 	socket.on('disconnect', (reason) => {
-		if ('transport close' == reason) console.log('the user left')
-		if (null != user) usersController.deleteUser(user.getName());
-		console.log('')
+		if (user != null) {
+			if ('transport close' == reason) console.log('the user ' + user.getName() + ' left\n')
+			usersController.deleteUser(user.getName());
+		}
 	});
 
 	//==================================================\\
@@ -46,22 +53,29 @@ io.on('connection', (socket) => {
 	//room management
 
 	socket.on('roomnameIsAvailable', (name) => {
-		var res = rooms;
-		this.list.map((room) => {
+		var res = true;
+		rooms.map((room) => {
 			if (name == room.getName()) { res = false; }
-		})
-		return res;
+		}); socket.emit('roomnameIsAvailableResponse', res)
 	})
 
 	socket.on('createRoom', (roomname) => {
 		var r = new Room(roomname);
 		rooms.push(r);
-		console.log('room ' + roomname + ' was created')
+		console.log('room ' + r.getName() + ' was created')
+	})
+
+	socket.on('joinRoom', (roomname) => {
+		var res = false;
+		if (roomExists(roomname)) {
+			res = true;
+			socket.join(roomname);
+			
+		}; socket.emit('joinRoomResponse', res)
 	})
 
 	//==================================================\\
 	//messages management
-
 
 	socket.on('new-message', (message) => {
 		io.emit('new-message', message)
@@ -72,6 +86,38 @@ app.get('/', function (req, res) {
 	res.json(usersController.list)
 })
 
+app.get('/rooms', function (req, res) {
+	res.json(rooms)
+})
+
 server.listen(port, () => {
 	console.log(`started on port: ${port} \n`);
 });
+
+//==================================================\\
+//rooms management functions
+
+function roomExists(roomname) {
+	var res = false;
+	rooms.map((room) => {
+		if (roomname == room.getName()) res = true;
+	}); return res;
+}
+
+function getRoom(roomname) {
+	for(var i = 0; i < rooms.length; ++i) {
+		if (roomname == rooms[i].getName()) {
+			return rooms[i];
+		}
+	}; return null;
+}
+
+// uses a room object
+function storeRoom(room) {
+	for(var i = 0; i < rooms.length; ++i) {
+		if (room.getName() == rooms[i].getName()) {
+			rooms[i] = room;
+			return true;
+		}
+	}; return false;
+}
