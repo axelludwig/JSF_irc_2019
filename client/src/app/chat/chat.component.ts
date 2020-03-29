@@ -20,11 +20,13 @@ export class ChatComponent implements OnInit {
 	}
 
 	createRoom(roomname) {
+		console.log('1')
 		if (roomname == "") {
 			alert("choose a username")
 		} else {
 			this.chatService.socket.emit('roomnameIsAvailable', roomname);
 			this.chatService.socket.on('roomnameIsAvailableResponse', (isAvailable) => {
+				console.log('2')
 				// this.chatService.isAvailable = boolean
 				if (isAvailable) {
 					this.chatService.socket.emit('createRoom', roomname);

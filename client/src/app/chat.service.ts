@@ -11,7 +11,6 @@ export class ChatService {
 		this.socket = io(this.url);
 	}
 
-
 	public sendMessage(message) {
 		this.socket.emit('new-message', message);
 	}
@@ -30,10 +29,6 @@ export class ChatService {
 	//         this.users = users;
 	//     });
 	// }
-
-	public testUsername() {
-
-	}
 
 	// isAvailableUsername(username) {
 	//     this.socket.emit('usernameIsAvailable', username);

@@ -56,8 +56,7 @@ io.on('connection', (socket) => {
 		var res = true;
 		rooms.map((room) => {
 			if (name == room.getName()) { res = false; }
-		})
-		socket.emit('roomnameIsAvailableResponse', res)
+		}); socket.emit('roomnameIsAvailableResponse', res)
 	})
 
 	socket.on('createRoom', (roomname) => {
@@ -67,13 +66,16 @@ io.on('connection', (socket) => {
 	})
 
 	socket.on('joinRoom', (roomname) => {
-		console.log(roomExists(roomname));
-		// socket.emit('roomnameIsAvailableResponse', res)
+		var res = false;
+		if (roomExists(roomname)) {
+			res = true;
+			socket.join(roomname);
+			
+		}; socket.emit('joinRoomResponse', res)
 	})
 
 	//==================================================\\
 	//messages management
-
 
 	socket.on('new-message', (message) => {
 		io.emit('new-message', message)
@@ -92,20 +94,30 @@ server.listen(port, () => {
 	console.log(`started on port: ${port} \n`);
 });
 
-
 //==================================================\\
 //rooms management functions
 
 function roomExists(roomname) {
+	var res = false;
 	rooms.map((room) => {
-		if (roomname == room.getName()) {
-			return true;
-		}
-	}); return false;
+		if (roomname == room.getName()) res = true;
+	}); return res;
 }
 
-// function getRoom() {
-// 	for(var i = 0; i < rooms.length; ++i) {
-// 		if (rooms[])
-// 	}
-// }
+function getRoom(roomname) {
+	for(var i = 0; i < rooms.length; ++i) {
+		if (roomname == rooms[i].getName()) {
+			return rooms[i];
+		}
+	}; return null;
+}
+
+// uses a room object
+function storeRoom(room) {
+	for(var i = 0; i < rooms.length; ++i) {
+		if (room.getName() == rooms[i].getName()) {
+			rooms[i] = room;
+			return true;
+		}
+	}; return false;
+}
