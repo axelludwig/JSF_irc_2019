@@ -9,6 +9,14 @@ module.exports = class Room {
     return this.name;
   }
 
+  getId() {
+    return this.id;
+  }
+
+  getUsers() {
+    return this.users;
+  }
+
   changeName(newname) {
     this.name = newname
   }
@@ -36,10 +44,10 @@ module.exports = class Room {
   }
 
   toJSON() {
-    var res = [];
-    this.users.map((u) => {
-      res.push(u.toJSON());
-    })
-    return res;
+    return {
+      name: this.getName(),
+      id: this.getId(),
+      users: this.getUsers()
+    }
   }
 }
