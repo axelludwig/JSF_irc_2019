@@ -1,11 +1,10 @@
-
 <div *ngIf="username; else elseBlock">
-  <app-chat ></app-chat>
-  
+  <app-chat></app-chat>
+
 </div>
 
 <ng-template #elseBlock>
-  <input #name type="text"  >
+  <input #name type="text">
   <button (click)="saveUsername(name.value)"> save username </button>
 
   <ul>
