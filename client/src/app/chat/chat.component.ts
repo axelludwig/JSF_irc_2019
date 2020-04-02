@@ -8,41 +8,46 @@ import { ChatService } from '../chat.service';
 })
 export class ChatComponent implements OnInit {
 
+	username: string;
+	room: string;
 	message: string;
 	messages: string[] = [];
 	title: string = "chat";
+
 	constructor(private chatService: ChatService) {
+		this.username = this.chatService.username;
 	}
 
 	sendMessage() {
-		this.chatService.sendMessage(this.message);
+		// this.chatService.sendMessage(this.message);
+		var object = {
+			message: this.message,
+			username: this.username,
+			room: this.room
+		}
+		this.chatService.socket.emit('roomMessage', object);
 		this.message = '';
+		this.chatService.socket.on('roomMessageResponse', (res) => {
+			console.log('ok')
+		})
 	}
 
 	createRoom(roomname) {
-		console.log('1')
-		if (roomname == "") {
-			alert("choose a username")
-		} else {
+		if (roomname == "") alert("choose a username")
+		else {
 			this.chatService.socket.emit('roomnameIsAvailable', roomname);
 			this.chatService.socket.on('roomnameIsAvailableResponse', (isAvailable) => {
-				console.log('2')
-				// this.chatService.isAvailable = boolean
-				if (isAvailable) {
-					this.chatService.socket.emit('createRoom', roomname);
-				} else {
-					console.log('1')
-					alert("this roomname is already taken")
-				}
+				if (isAvailable) this.chatService.socket.emit('createRoom', roomname);
+				else alert("this roomname is already taken")
 			})
-		}
-		return;
+		} return;
 	}
 
 	joinRoom(roomname) {
 		this.chatService.socket.emit('joinRoom', roomname);
 		this.chatService.socket.on('joinRoomResponse', (response) => {
-
+			console.log('connected to ' + roomname)
+			this.room = roomname;
 		})
 	}
 
