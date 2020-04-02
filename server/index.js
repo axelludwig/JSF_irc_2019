@@ -29,15 +29,18 @@ io.on('connection', (socket) => {
 	console.log('socket connection starts');
 	var user;
 
-	socket.on('saveUsername', (username) => {
+	socket.on('connectUser', (username) => {
 		user = usersController.saveUsername(username);
+		io.emit('newUserConnected', username);
 		console.log('user ' + username + ' connected');
 	})
 
 	socket.on('disconnect', (reason) => {
 		if (user != null) {
-			if ('transport close' == reason) console.log('the user ' + user.getName() + ' left\n')
-			usersController.deleteUser(user.getName());
+			var name = user.getName();
+			if ('transport close' == reason) console.log('the user ' + name + ' left\n')
+			usersController.deleteUser(name);
+			io.emit('userDisconnected', name);
 		}
 	});
 
@@ -71,9 +74,11 @@ io.on('connection', (socket) => {
 	socket.on('joinRoom', (roomname) => {
 		var res = false;
 		if (roomExists(roomname)) {
+			var r = getRoom(roomname);
+			r.addUser(user);
 			res = true;
 			socket.join(roomname);
-			
+
 		}; socket.emit('joinRoomResponse', res)
 	})
 
@@ -116,7 +121,7 @@ function roomExists(roomname) {
 }
 
 function getRoom(roomname) {
-	for(var i = 0; i < rooms.length; ++i) {
+	for (var i = 0; i < rooms.length; ++i) {
 		if (roomname == rooms[i].getName()) {
 			return rooms[i];
 		}
@@ -125,7 +130,7 @@ function getRoom(roomname) {
 
 // uses a room object
 function storeRoom(room) {
-	for(var i = 0; i < rooms.length; ++i) {
+	for (var i = 0; i < rooms.length; ++i) {
 		if (room.getName() == rooms[i].getName()) {
 			rooms[i] = room;
 			return true;

@@ -65,7 +65,7 @@ export class ChatComponent implements OnInit {
 			.getMessages()
 			.subscribe((message: string) => {
 				this.messages.push(message);
-			});
+			});		
 	}
 
 }
