@@ -6,6 +6,7 @@ export class ChatService {
 	public socket;	
 	public username;
 	public users: [];
+	isAvailable: Boolean
 	// public isAvailable = false;
 
 	constructor() {
@@ -30,19 +31,19 @@ export class ChatService {
 		this.socket.emit('saveUsername', username)
 	}
 
-	// public getUsers() {
-	//     this.socket.emit('getConnectedUsers');
-	//     this.socket.on('getUsersResponse', (users) => {
-	//         this.users = users;
-	//     });
-	// }
+	public getUsers() {
+	    this.socket.emit('getConnectedUsers');
+	    this.socket.on('getUsersResponse', (users) => {
+	        this.users = users;
+	    });
+	}
 
-	// isAvailableUsername(username) {
-	//     this.socket.emit('usernameIsAvailable', username);
-	//     this.socket.on('usernameIsAvailableResponse', (boolean) => {
-	//         this.isAvailable = boolean
-	//     })
-	// }
+	isAvailableUsername(username) {
+	    this.socket.emit('usernameIsAvailable', username);
+	    this.socket.on('usernameIsAvailableResponse', (boolean) => {
+	        this.isAvailable = boolean
+	    })
+	}
 
 
 	public test2() {
