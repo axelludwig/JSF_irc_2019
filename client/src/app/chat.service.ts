@@ -28,27 +28,45 @@ export class ChatService {
 		this.socket.emit('createRoom', roomname);
 	}
 
-	public saveUsername(username) {
-		this.socket.emit('saveUsername', username)
-	}
+	// public saveUsername(username) {
+	// 	this.socket.emit('saveUsername', username)
+	// }
 
-	public getUsers() {
-	    this.socket.emit('getConnectedUsers');
-	    this.socket.on('getUsersResponse', (users) => {
-	        this.users = users;
-	    });
-	}
+	// public getUsers() {
+	//     this.socket.emit('getConnectedUsers');
+	//     this.socket.on('getUsersResponse', (users) => {
+	//         this.users = users;
+	//     });
+	// }
 
-	isAvailableUsername(username) {
-	    this.socket.emit('usernameIsAvailable', username);
-	    this.socket.on('usernameIsAvailableResponse', (boolean) => {
-	        this.isAvailable = boolean
-	    })
-	}
+	// isAvailableUsername(username) {
+	//     this.socket.emit('usernameIsAvailable', username);
+	//     this.socket.on('usernameIsAvailableResponse', (boolean) => {
+	//         this.isAvailable = boolean
+	//     })
+	// }
+
 
 
 	public test2() {
 
+	}
+
+	public getNewConnectedUser = () => {
+		return Observable.create((observer) => {
+			this.socket.on('newUserConnected', (user) => {
+				observer.next({
+					username: user,
+					type: 'add'
+				});
+			});
+			this.socket.on('userDisconnected', (user) => {
+				observer.next({
+					username: user,
+					type: 'remove'
+				});
+			})
+		})
 	}
 
 	public getMessages = () => {
