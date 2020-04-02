@@ -48,6 +48,6 @@ export class AppComponent {
   }
 
   ngOnInit() {
-    // this.getUsers();
+    this.getUsers();
   }
 }
