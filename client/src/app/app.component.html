@@ -4,26 +4,31 @@
 </div>
 
 <ng-template #elseBlock>
-  <div class="login-form">
-    <form >
-      <h2 class="text-center">Join The Chat</h2>       
-      <div class="form-group">
-          <input #name type="text" class="form-control" placeholder="Username" required="required">
+ 
+    
+      <div class="login-form">
+        <form >
+          <h2 class="text-center">Join The Chat</h2>       
+          <div class="form-group">
+              <input #name type="text" class="form-control" placeholder="Username" required="required">
+          </div>
+          <div class="form-group">
+              <button (click)="saveUsername(name.value)" class="btn btn-primary btn-block">save your name</button>
+          </div>
+          <div class="single category">
+            <h3 class="side-title">Online persons: {{users.length}}</h3>
+            <ul class="list-unstyled"> 
+              <li *ngFor="let user of users">
+                {{user.name}}
+              </li>
+            </ul>
+          </div> 
+        </form> 
+      
+        
       </div>
-      <div class="form-group">
-          <button (click)="saveUsername(name.value)" class="btn btn-primary btn-block">save your name</button>
-      </div>
-      <div class="clearfix">
-          
-      </div>  
-    </form>      
-</div>
-  <!-- <input #name type="text"  >
-  <button (click)="saveUsername(name.value)"> save username </button> -->
 
-  <!-- <ul>
-    <li *ngFor="let user of users">
-      {{user.name}}
-    </li>
-  </ul> -->
+
+
+ 
 </ng-template>

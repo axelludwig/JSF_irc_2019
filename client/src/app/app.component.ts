@@ -9,7 +9,7 @@ import { ChatService } from './chat.service';
 export class AppComponent {
   username: string;
   title = "chat";
-
+  users :[] = [];
   constructor(private chatService: ChatService) {
   }
 
@@ -43,11 +43,12 @@ export class AppComponent {
   getUsers() {
     this.chatService.socket.emit('getConnectedUsers');
     this.chatService.socket.on('getUsersResponse', (users) => {
-      console.log(users)
+      this.users=users;
     });
+
   }
 
   ngOnInit() {
-    // this.getUsers();
+    this.getUsers();
   }
 }
