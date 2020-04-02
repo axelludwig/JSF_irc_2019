@@ -22,6 +22,7 @@ export class AppComponent {
         if (isAvailable) {
           this.username = username;
           this.chatService.saveUsername(username)
+          this.chatService.username = username;
         } else {
           alert("this username is already taken")
         }

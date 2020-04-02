@@ -80,6 +80,13 @@ io.on('connection', (socket) => {
 	socket.on('new-message', (message) => {
 		io.emit('new-message', message)
 	});
+
+	socket.on('roomMessage', (object) => {
+		// io.emit('new-message', message)		
+		// io.to(object.room).emit('hello', msg);
+	});
+
+	// io.to('my room').emit('hello', msg);
 });
 
 app.get('/', function (req, res) {
