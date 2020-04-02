@@ -19,17 +19,18 @@ export class ChatComponent implements OnInit {
 	}
 
 	sendMessage() {
-		// this.chatService.sendMessage(this.message);
 		var object = {
 			message: this.message,
 			username: this.username,
 			room: this.room
 		}
 		this.chatService.socket.emit('roomMessage', object);
-		this.message = '';
-		this.chatService.socket.on('roomMessageResponse', (res) => {
-			console.log('ok')
-		})
+		// this.message = '';
+		// this.chatService.socket.on('roomMessageResponse', (object) => {
+		// 	// this.message = res.
+		// 	console.log('ok')
+		// 	console.log(object)
+		// })
 	}
 
 	createRoom(roomname) {

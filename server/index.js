@@ -10,6 +10,9 @@ var UserController = require('./UserController.js')
 
 var usersController = new UserController();
 
+
+activesRooms = [];
+
 //debug
 var rooms = [];
 var r = new Room('room1');
@@ -82,8 +85,9 @@ io.on('connection', (socket) => {
 	});
 
 	socket.on('roomMessage', (object) => {
+		console.log('new message : '); console.log(object);
 		// io.emit('new-message', message)		
-		// io.to(object.room).emit('hello', msg);
+		io.to(object.room).emit('roomMessageResponse', object);
 	});
 
 	// io.to('my room').emit('hello', msg);
