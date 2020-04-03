@@ -7,30 +7,23 @@ import { ChatService } from '../chat.service';
 	styleUrls: ['./chat.component.css']
 })
 export class ChatComponent implements OnInit {
-
-	username: string;
 	room: string;
 	message: string;
 	messages: string[] = [];
 	title: string = "chat";
 
 	constructor(private chatService: ChatService) {
-		this.username = this.chatService.username;
+		
+		// this.username = this.chatService.username;
 	}
 
 	sendMessage() {
 		var object = {
 			message: this.message,
-			username: this.username,
+			username: this.chatService.username,
 			room: this.room
 		}
 		this.chatService.socket.emit('roomMessage', object);
-		// this.message = '';
-		// this.chatService.socket.on('roomMessageResponse', (object) => {
-		// 	// this.message = res.
-		// 	console.log('ok')
-		// 	console.log(object)
-		// })
 	}
 
 	createRoom(roomname) {

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 export class ChatService {
 	private url = 'http://localhost:3000';
 	public socket;
+	public room;
 	public username;
 	public users: [];
 	isAvailable: Boolean

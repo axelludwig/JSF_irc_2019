@@ -60,10 +60,6 @@ io.on('connection', (socket) => {
 	//room management
 
 	socket.on('getRooms', () => {
-		rooms.map((r) => {
-			console.log(r.toJSON());
-		})
-		// console.log(rooms)
 		socket.emit('getRoomsResponse', rooms, rooms.length)
 	})
 
@@ -121,20 +117,27 @@ io.on('connection', (socket) => {
 		}; socket.emit('joinRoomResponse', res)
 	})
 
+	socket.on('leaveRoom', (roomname) => {
+		var res = false;
+		if (roomExists(roomname)) {
+			var r = getRoom(roomname);
+			r.removeUser(user);
+			res = true;
+			socket.leave(roomname);
+
+		}; socket.emit('joinRoomResponse', res)
+	})
+
+
 	//==================================================\\
 	//messages management
 
-	socket.on('new-message', (message) => {
-		io.emit('new-message', message)
-	});
-
 	socket.on('roomMessage', (object) => {
 		console.log('new message : '); console.log(object);
-		// io.emit('new-message', message)		
 		io.to(object.room).emit('roomMessageResponse', object);
 	});
 
-	// io.to('my room').emit('hello', msg);
+
 });
 
 app.get('/', function (req, res) {

@@ -18,6 +18,14 @@ export class RoomsComponent implements OnInit {
     });
   }
 
+  leaveRoom(roomname) {
+    this.chatService.socket.emit('leaveRoom', roomname);
+		this.chatService.socket.on('leaveRoomResponse', (response) => {
+			console.log('disconnected from ' + roomname)
+			this.chatService.room = '';
+		})
+  }
+
   createRoom(roomname) {
     if (roomname == "") alert("choose a username")
     else {
@@ -39,6 +47,7 @@ export class RoomsComponent implements OnInit {
       })
     } return;
   }
+
   modifyRoom(roomname, newName) {
     if (roomname == "") alert("choose a username")
     else {
@@ -55,27 +64,15 @@ export class RoomsComponent implements OnInit {
     this.chatService
       .getNewRoom()
       .subscribe((room) => {
-        if ('add' == room.type) {
-          this.rooms.push({
-            name: room.name
-          })
-        }
+        if ('add' == room.type) this.rooms.push({ name: room.name })
         else if (room.type == 'modify') {
           let index;
-          for (let i = 0; i < this.rooms.length; ++i) {
-            if (room.name == this.rooms[i].name) {
-              index = i;
-            }
-          }
+          for (let i = 0; i < this.rooms.length; ++i) if (room.name == this.rooms[i].name) index = i;
           this.rooms[index].name = room.newName;
         }
         else {
           let index;
-          for (let i = 0; i < this.rooms.length; ++i) {
-            if (room.name == this.rooms[i].name) {
-              index = i;
-            }
-          }
+          for (let i = 0; i < this.rooms.length; ++i) if (room.name == this.rooms[i].name) index = i;
           this.rooms.splice(index, 1)
         }
       });
