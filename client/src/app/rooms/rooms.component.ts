@@ -11,45 +11,43 @@ export class RoomsComponent implements OnInit {
 
   constructor(private chatService: ChatService) { }
 
-  getrooms(){
+  getrooms() {
     this.chatService.socket.emit('getRooms');
-    this.chatService.socket.on('getRoomsResponse', (rooms) => {
-      this.rooms = rooms;
-
-    console.log(this.rooms);
+    this.chatService.socket.on('getRoomsResponse', (rooms, length) => {
+      this.rooms = rooms.splice(0)
     });
   }
 
   createRoom(roomname) {
-		if (roomname == "") alert("choose a username")
-		else {
-			this.chatService.socket.emit('roomnameIsAvailable', roomname);
-			this.chatService.socket.on('roomnameIsAvailableResponse', (isAvailable) => {
-				if (isAvailable) this.chatService.socket.emit('createRoom', roomname);
-				else alert("this roomname is already taken")
-			})
-		} return;
+    if (roomname == "") alert("choose a username")
+    else {
+      this.chatService.socket.emit('roomnameIsAvailable', roomname);
+      this.chatService.socket.on('roomnameIsAvailableResponse', (isAvailable) => {
+        if (isAvailable) this.chatService.socket.emit('createRoom', roomname);
+        else alert("this roomname is already taken")
+      })
+    } return;
   }
 
   deleteRoom(roomname) {
-		if (roomname == "") alert("choose a username")
-		else {
-			this.chatService.socket.emit('roomnameIsAvailable', roomname);
-			this.chatService.socket.on('roomnameIsAvailableResponse', (isAvailable) => {
-				if (isAvailable) this.chatService.socket.emit('deleteRoom', roomname);
-				else alert("this roomname is already taken")
-			})
-		} return;
+    if (roomname == "") alert("choose a username")
+    else {
+      this.chatService.socket.emit('roomnameIsAvailable', roomname);
+      this.chatService.socket.on('roomnameIsAvailableResponse', (isAvailable) => {
+        if (isAvailable) this.chatService.socket.emit('deleteRoom', roomname);
+        else alert("this roomname is already taken")
+      })
+    } return;
   }
   modifyRoom(roomname, newName) {
-		if (roomname == "") alert("choose a username")
-		else {
-			this.chatService.socket.emit('roomnameIsAvailable', roomname);
-			this.chatService.socket.on('roomnameIsAvailableResponse', (isAvailable) => {
-				if (isAvailable) this.chatService.socket.emit('modifyRoom', roomname, newName);
-				else alert("this roomname is already taken")
-			})
-		} return;
+    if (roomname == "") alert("choose a username")
+    else {
+      this.chatService.socket.emit('roomnameIsAvailable', roomname);
+      this.chatService.socket.on('roomnameIsAvailableResponse', (isAvailable) => {
+        if (isAvailable) this.chatService.socket.emit('modifyRoom', roomname, newName);
+        else alert("this roomname is already taken")
+      })
+    } return;
   }
 
   ngOnInit(): void {
@@ -61,9 +59,9 @@ export class RoomsComponent implements OnInit {
           this.rooms.push({
             name: room.name
           })
-        } 
-        else if(room.type=='modify'){
-          let index; 
+        }
+        else if (room.type == 'modify') {
+          let index;
           for (let i = 0; i < this.rooms.length; ++i) {
             if (room.name == this.rooms[i].name) {
               index = i;
@@ -72,7 +70,7 @@ export class RoomsComponent implements OnInit {
           this.rooms[index].name = room.newName;
         }
         else {
-          let index; 
+          let index;
           for (let i = 0; i < this.rooms.length; ++i) {
             if (room.name == this.rooms[i].name) {
               index = i;

@@ -21,24 +21,10 @@ export class AppComponent {
       this.users.map((n) => { if (username == n.name) available = false; });
       if (available) {
         this.chatService.socket.emit('connectUser', username)
-        console.log(username)
-        console.log(this.username)
         this.chatService.username = username;
         this.username = username;
       } else
         alert("this username is already taken")
-
-      // this.chatService.socket.emit('usernameIsAvailable', username);
-      // this.chatService.socket.on('usernameIsAvailableResponse', (isAvailable) => {
-      //   if (isAvailable) {
-      //     this.chatService.socket.emit('connectUser', username)
-      //     console.log(username)
-      //     console.log(this.username)
-      //     this.chatService.username = username;
-      //     this.username = username;
-      //   } else 
-      //     alert("this username is already taken")
-      // })
     }
   }
 
