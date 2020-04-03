@@ -30,6 +30,7 @@ io.on('connection', (socket) => {
 	var user;
 
 	socket.on('connectUser', (username) => {
+		// console.log('added a user')
 		user = usersController.saveUsername(username);
 		io.emit('newUserConnected', username);
 		console.log('user ' + username + ' connected');
