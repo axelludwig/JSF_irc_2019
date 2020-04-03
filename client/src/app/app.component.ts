@@ -14,17 +14,31 @@ export class AppComponent {
   }
 
   saveUsername(username) {
+    console.log('appel');
     if (username == "") alert("choose a username")
     else {
-      this.chatService.socket.emit('usernameIsAvailable', username);
-      this.chatService.socket.on('usernameIsAvailableResponse', (isAvailable) => {
-        if (isAvailable) {
-          this.username = username;
-          this.chatService.socket.emit('connectUser', username)
-          // this.chatService.saveUsername(username)
-          this.chatService.username = username;
-        } else alert("this username is already taken")
-      })
+      var available = true;
+      this.users.map((n) => { if (username == n.name) available = false; });
+      if (available) {
+        this.chatService.socket.emit('connectUser', username)
+        console.log(username)
+        console.log(this.username)
+        this.chatService.username = username;
+        this.username = username;
+      } else
+        alert("this username is already taken")
+
+      // this.chatService.socket.emit('usernameIsAvailable', username);
+      // this.chatService.socket.on('usernameIsAvailableResponse', (isAvailable) => {
+      //   if (isAvailable) {
+      //     this.chatService.socket.emit('connectUser', username)
+      //     console.log(username)
+      //     console.log(this.username)
+      //     this.chatService.username = username;
+      //     this.username = username;
+      //   } else 
+      //     alert("this username is already taken")
+      // })
     }
   }
 
@@ -39,7 +53,7 @@ export class AppComponent {
     this.getUsers();
 
     this.chatService
-      .getNewConnectedUser()
+      .userUpdate()
       .subscribe((user) => {
         if ('add' == user.type) {
           this.users.push({

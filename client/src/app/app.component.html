@@ -16,7 +16,7 @@
               <button (click)="saveUsername(name.value)" class="btn btn-primary btn-block">save your name</button>
           </div>
           <div class="single category">
-            <h3 class="side-title">Online persons: {{users.length}}</h3>
+            <h3 class="side-title">Online users : {{users.length}}</h3>
             <ul class="list-unstyled"> 
               <li *ngFor="let user of users">
                 {{user.name}}
