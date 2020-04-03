@@ -14,7 +14,7 @@ export class RoomsComponent implements OnInit {
   getrooms() {
     this.chatService.socket.emit('getRooms');
     this.chatService.socket.on('getRoomsResponse', (rooms, length) => {
-      this.rooms = rooms.splice(0)
+      this.rooms = rooms
     });
   }
 
@@ -28,18 +28,16 @@ export class RoomsComponent implements OnInit {
 
   createRoom(roomname) {
     console.log('i')
-    if (roomname == "") alert("choose a username")
+    if (roomname == "") alert("choose a roomname")
     else {
-      this.chatService.socket.emit('roomnameIsAvailable', roomname);
-      this.chatService.socket.on('roomnameIsAvailableResponse', (isAvailable) => {
-        if (isAvailable) {
-          this.chatService.socket.emit('createRoom', roomname);
+      var available = true;
+      this.rooms.map((n) => { if (roomname == n.name) available = false; });
+      if (available) {
+        this.chatService.socket.emit('createRoom', roomname)
+      } else
+          alert("this roomname is already taken")
+    }
 
-          // this.rooms.push(roomname)
-        } 
-        else alert("this roomname is already taken")
-      })
-    } return;
   }
 
   deleteRoom(roomname) {
@@ -69,7 +67,12 @@ export class RoomsComponent implements OnInit {
     this.chatService
       .getNewRoom()
       .subscribe((room) => {
-        if ('add' == room.type) this.rooms.push({ name: room.name })
+        if ('add' == room.type){
+          this.rooms.push({ name: room.name })
+          console.log("hello")
+          console.log(room.name);
+        } 
+        
         else if (room.type == 'modify') {
           let index;
           for (let i = 0; i < this.rooms.length; ++i) if (room.name == this.rooms[i].name) index = i;
@@ -82,5 +85,6 @@ export class RoomsComponent implements OnInit {
         }
       });
   }
+  
 
 }
