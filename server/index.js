@@ -58,6 +58,10 @@ io.on('connection', (socket) => {
 	//==================================================\\
 	//room management
 
+	socket.on('getRooms', () => {
+		socket.emit('getRoomsResponse', rooms)
+	})
+
 	socket.on('roomnameIsAvailable', (name) => {
 		var res = true;
 		rooms.map((room) => {
@@ -68,7 +72,41 @@ io.on('connection', (socket) => {
 	socket.on('createRoom', (roomname) => {
 		var r = new Room(roomname);
 		rooms.push(r);
+		socket.emit('addRoom',roomname);
 		console.log('room ' + r.getName() + ' was created')
+	})
+
+	socket.on('deleteRoome',(roomname)=>{
+		var cpt =0;
+		for(var i = r.length - 1; i >= 0; i--){
+			if (r[i].name == roomname){
+				r.splice(i,1);
+				cpt++;
+			}
+		}
+		if (cpt === 0){
+			socket.emit('deleteRoomError','room doesn\'t exist ')
+		}
+		else{
+			socket.emit('deletRoomSucces',roomname)
+		}
+
+	})
+
+	socket.on('modifyRoom',(roomname, newName)=>{
+		var cpt =0;
+		for(var i = r.length - 1; i >= 0; i--){
+			if (r[i].name == roomname){
+				r[i].name = newName;
+				cpt++;
+			}
+		}
+		if (cpt === 0){
+			socket.emit('modifyRoomError','room doesn\'t exist ')
+		}
+		else{
+			socket.emit('modifyRoomSucces',roomname, newName)
+		}
 	})
 
 	socket.on('joinRoom', (roomname) => {

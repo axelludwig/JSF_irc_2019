@@ -6,11 +6,15 @@ import { AppComponent } from './app.component';
 
 import { ChatService } from './chat.service';
 import { ChatComponent } from './chat/chat.component';
+import { RoomsComponent } from './rooms/rooms.component';
+import { UsersComponent } from './users/users.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ChatComponent
+    ChatComponent,
+    RoomsComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,

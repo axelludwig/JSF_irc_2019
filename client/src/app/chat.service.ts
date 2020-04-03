@@ -69,6 +69,32 @@ export class ChatService {
 		})
 	}
 
+// get all the rooms 
+
+	public getNewRoom =() =>{
+		return Observable.create((observer)=>{
+			this.socket.on('getRoomsResponse',(room) => {
+				observer.next({
+					name: room,
+					type: 'add'
+				});
+			});
+			this.socket.on('deletRoomSucces', (room) => {
+				observer.next({
+					name: room,
+					type: 'remove'
+				});
+			});
+			this.socket.on('modifyRoomSucces',(room, newName) =>{
+				observer.next({
+					name: room,
+					newName: newName,
+					type: 'modify'
+				});
+			})
+		})
+	}
+
 	public getMessages = () => {
 		return Observable.create((observer) => {
 			// this.socket.on('new-message', (message) => {
