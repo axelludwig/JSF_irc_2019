@@ -71,10 +71,12 @@ io.on('connection', (socket) => {
 	})
 
 	socket.on('createRoom', (roomname) => {
+		console.log('appel')
 		var r = new Room(roomname);
 		rooms.push(r);
 		socket.emit('addRoom', roomname);
 		console.log('room ' + r.getName() + ' was created')
+		console.log(rooms)
 	})
 
 	socket.on('deleteRoome', (roomname) => {

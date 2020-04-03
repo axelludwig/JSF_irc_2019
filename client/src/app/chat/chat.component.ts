@@ -26,16 +26,16 @@ export class ChatComponent implements OnInit {
 		this.chatService.socket.emit('roomMessage', object);
 	}
 
-	createRoom(roomname) {
-		if (roomname == "") alert("choose a username")
-		else {
-			this.chatService.socket.emit('roomnameIsAvailable', roomname);
-			this.chatService.socket.on('roomnameIsAvailableResponse', (isAvailable) => {
-				if (isAvailable) this.chatService.socket.emit('createRoom', roomname);
-				else alert("this roomname is already taken")
-			})
-		} return;
-	}
+	// createRoom(roomname) {
+	// 	if (roomname == "") alert("choose a username")
+	// 	else {
+	// 		this.chatService.socket.emit('roomnameIsAvailable', roomname);
+	// 		this.chatService.socket.on('roomnameIsAvailableResponse', (isAvailable) => {
+	// 			if (isAvailable) this.chatService.socket.emit('createRoom', roomname);
+	// 			else alert("this roomname is already taken")
+	// 		})
+	// 	} return;
+	// }
 
 	joinRoom(roomname) {
 		this.chatService.socket.emit('joinRoom', roomname);

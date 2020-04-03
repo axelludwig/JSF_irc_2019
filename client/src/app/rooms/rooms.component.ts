@@ -27,11 +27,16 @@ export class RoomsComponent implements OnInit {
   }
 
   createRoom(roomname) {
+    console.log('i')
     if (roomname == "") alert("choose a username")
     else {
       this.chatService.socket.emit('roomnameIsAvailable', roomname);
       this.chatService.socket.on('roomnameIsAvailableResponse', (isAvailable) => {
-        if (isAvailable) this.chatService.socket.emit('createRoom', roomname);
+        if (isAvailable) {
+          this.chatService.socket.emit('createRoom', roomname);
+
+          // this.rooms.push(roomname)
+        } 
         else alert("this roomname is already taken")
       })
     } return;
