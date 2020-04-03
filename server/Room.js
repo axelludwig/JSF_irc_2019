@@ -2,7 +2,17 @@ module.exports = class Room {
   constructor(name) {
     this.name = name;
     this.users = [];
+    this.messages = [];
     this.id = Math.floor(Math.random() * 1000000)
+  }
+
+  // la structure d'un message
+  // message: this.message,
+  // username: this.username,
+  // room: this.room
+
+  addMessage(message){
+    this.messages.push(message)
   }
 
   getName() {
