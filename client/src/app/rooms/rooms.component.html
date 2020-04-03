@@ -3,4 +3,8 @@
     <li *ngFor="let room of rooms">
       {{room.name}}
     </li>
-  </ul>
+</ul>
+<form >
+    <input  #name type="text" class="form-control" placeholder="room name" required="required">
+    <button (click)="createRoom(name.value)">create</button>
+</form>
