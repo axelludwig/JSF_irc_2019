@@ -14,9 +14,9 @@ export class ChatService {
 		this.socket = io(this.url);
 	}
 
-	public createRoom(roomname) {
-		this.socket.emit('createRoom', roomname);
-	}
+	// public createRoom(roomname) {
+	// 	this.socket.emit('createRoom', roomname);
+	// }
 
 
 	public test2() {
@@ -52,7 +52,7 @@ export class ChatService {
 
 	public getNewRoom =() =>{
 		return Observable.create((observer)=>{
-			this.socket.on('getRoomsResponse',(room) => {
+			this.socket.on('addRoom',(room) => {
 				observer.next({
 					name: room,
 					type: 'add'
