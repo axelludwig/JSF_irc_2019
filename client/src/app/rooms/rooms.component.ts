@@ -14,8 +14,10 @@ export class RoomsComponent implements OnInit {
   getrooms() {
     this.chatService.socket.emit('getRooms');
     this.chatService.socket.on('getRoomsResponse', (rooms, length) => {
-      this.rooms = rooms
+      this.rooms = rooms;
     });
+    
+
   }
 
   leaveRoom(roomname) {
@@ -41,14 +43,8 @@ export class RoomsComponent implements OnInit {
   }
 
   deleteRoom(roomname) {
-    if (roomname == "") alert("choose a username")
-    else {
-      this.chatService.socket.emit('roomnameIsAvailable', roomname);
-      this.chatService.socket.on('roomnameIsAvailableResponse', (isAvailable) => {
-        if (isAvailable) this.chatService.socket.emit('deleteRoom', roomname);
-        else alert("this roomname is already taken")
-      })
-    } return;
+    this.chatService.deleteRoom(roomname);
+
   }
 
   modifyRoom(roomname, newName) {
@@ -62,26 +58,36 @@ export class RoomsComponent implements OnInit {
     } return;
   }
 
+  joinRoom(roomname) {
+    this.chatService.socket.emit('joinRoom',roomname);
+		this.chatService.joinRoom();
+	}
   ngOnInit(): void {
     this.getrooms();
     this.chatService
       .getNewRoom()
       .subscribe((room) => {
+        console.log(room);
         if ('add' == room.type){
           this.rooms.push({ name: room.name })
-          console.log("hello")
           console.log(room.name);
         } 
         
         else if (room.type == 'modify') {
           let index;
-          for (let i = 0; i < this.rooms.length; ++i) if (room.name == this.rooms[i].name) index = i;
+          for (let i = 0; i < this.rooms.length; ++i){ 
+            if (room.name == this.rooms[i].name) 
+              index = i;
+          }
           this.rooms[index].name = room.newName;
         }
         else {
           let index;
-          for (let i = 0; i < this.rooms.length; ++i) if (room.name == this.rooms[i].name) index = i;
-          this.rooms.splice(index, 1)
+          for (let i = 0; i < this.rooms.length; ++i) {
+            if (room.name === this.rooms[i].name) 
+              index = i;
+          }
+          this.rooms.splice(index, 1);
         }
       });
   }

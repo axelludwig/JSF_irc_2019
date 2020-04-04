@@ -14,7 +14,6 @@ export class AppComponent {
   }
 
   saveUsername(username) {
-    console.log('appel');
     if (username == "") alert("choose a username")
     else {
       var available = true;

@@ -37,13 +37,6 @@ export class ChatComponent implements OnInit {
 	// 	} return;
 	// }
 
-	joinRoom(roomname) {
-		this.chatService.socket.emit('joinRoom', roomname);
-		this.chatService.socket.on('joinRoomResponse', (response) => {
-			console.log('connected to ' + roomname)
-			this.room = roomname;
-		})
-	}
 
 	test() {
 		// this.chatService.joinRoom();
@@ -58,7 +51,11 @@ export class ChatComponent implements OnInit {
 			.getMessages()
 			.subscribe((message: string) => {
 				this.messages.push(message);
-			});		
+			});	
+		this.chatService.joinRoom().subscribe(() =>{
+			this.room = this.chatService.room;
+			console.log(this.room);
+		})	
 	}
 
 }
