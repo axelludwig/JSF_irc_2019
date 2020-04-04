@@ -26,9 +26,12 @@ export class ChatComponent implements OnInit {
 			message: this.message,
 			username: this.chatService.username,
 			room: this.room
-		}
+		};
+		((<HTMLInputElement>document.getElementById("input")).value) = ''
+		// console.log('ici ' + document.getElementById('textArea').innerText)
+		// document.getElementById('textArea').innerText = 'salut';
 		this.chatService.socket.emit('roomMessage', object);
-		console.log(this.message);
+		// console.log(this.message);
 		
 	}
 
@@ -69,13 +72,7 @@ export class ChatComponent implements OnInit {
 			});	
 		this.chatService.joinRoom().subscribe(() =>{
 			this.room = this.chatService.room;
-<<<<<<< HEAD
-			console.log('ici ' + this.room);
 		})	
-=======
-			console.log(this.room);
-		})
->>>>>>> peng
 	}
 	
 	

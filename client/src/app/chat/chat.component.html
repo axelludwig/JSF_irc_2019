@@ -1,6 +1,6 @@
 <div class="container">
 	<div class="row">
-		<div class="col-sm-4">
+		<div class="col-sm-3">
 			<app-rooms>
 
 			</app-rooms>
@@ -43,15 +43,15 @@
 				</div>
 				<div class="form">
 					<form >
-						<input
+						<input id="input"
 						  type="text"
 						  placeholder="Type a message"
 						  name="newMessage"
 						  [(ngModel)]="message"
 						  #input
-						  (keyup)="$event.keyCode == 13 && sendMessage()"
+						  (keyup)="$event.keyCode == 13 && sendMessage();"
 						/>
-						<button type="button"  (click)="sendMessage(); input.value=''">
+						<button type="button"  (click)="sendMessage();">
 						 send
 						</button>
 					</form>
