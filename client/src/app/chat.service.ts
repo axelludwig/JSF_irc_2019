@@ -23,6 +23,8 @@ export class ChatService {
 
 	}
 
+
+
 	public getAllRooms = () => {
 		return Observable.create((observer) => {
 			this.socket.on('roomMessageResponse', (message) => {
@@ -50,6 +52,7 @@ export class ChatService {
 
 // get all the rooms 
 
+
 	public getNewRoom =() =>{
 		return Observable.create((observer)=>{
 			this.socket.on('addRoom',(room) => {
@@ -71,9 +74,25 @@ export class ChatService {
 					type: 'modify'
 				});
 			})
+			return () => {
+				this.socket.disconnect();
+			  };
 		})
 	}
+	public joinRoom = () => {
+		return Observable.create((observer) => {
+			this.socket.on('joinRoomResponse', (response, roomname) => {
+			console.log('connected to ' + roomname)
+			this.room = roomname;
+			observer.next(roomname);
+			})
+		});
 
+		
+	}
+	deleteRoom(roomname) {
+		this.socket.emit('deleteRoom',roomname);
+	}
 	public getMessages = () => {
 		return Observable.create((observer) => {
 			this.socket.on('roomMessageResponse', (message) => {
