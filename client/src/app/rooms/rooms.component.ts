@@ -49,7 +49,7 @@ export class RoomsComponent implements OnInit {
   leaveRoom(roomname) {
     this.chatService.socket.emit('leaveRoom', roomname);
     this.chatService.socket.on('leaveRoomResponse', (response) => {
-      console.log('disconnected from ' + roomname)
+      // console.log('disconnected from ' + roomname)
       this.chatService.room = '';
     })
   }

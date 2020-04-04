@@ -54,7 +54,7 @@ export class ChatComponent implements OnInit {
 			});	
 		this.chatService.joinRoom().subscribe(() =>{
 			this.room = this.chatService.room;
-			console.log('ici ' + this.room);
+			// console.log('ici ' + this.room);
 		})	
 	}
 
