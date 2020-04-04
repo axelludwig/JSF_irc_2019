@@ -10,7 +10,6 @@ var UserController = require('./UserController.js')
 
 var usersController = new UserController();
 
-
 activesRooms = [];
 
 //debug
@@ -19,7 +18,6 @@ var r = new Room('room1');
 rooms.push(r);
 r = new Room('room2');
 rooms.push(r);
-console.log(rooms)
 usersController.saveUsername('axel');
 usersController.saveUsername('peng');
 
@@ -30,7 +28,6 @@ io.on('connection', (socket) => {
 	var user;
 
 	socket.on('connectUser', (username) => {
-		// console.log('added a user')
 		user = usersController.saveUsername(username);
 		io.emit('newUserConnected', username);
 		console.log('user ' + username + ' connected');
@@ -38,7 +35,7 @@ io.on('connection', (socket) => {
 
 	socket.on('disconnect', (reason) => {
 		if (user != null) {
-			var name = user.getName();
+			var name = user.name;
 			if ('transport close' == reason) console.log('the user ' + name + ' left\n')
 			usersController.deleteUser(name);
 			io.emit('userDisconnected', name);
@@ -66,7 +63,7 @@ io.on('connection', (socket) => {
 	socket.on('roomnameIsAvailable', (name) => {
 		var res = true;
 		rooms.map((room) => {
-			if (name == room.getName()) { res = false; }
+			if (name == room.name) { res = false; }
 		}); socket.emit('roomnameIsAvailableResponse', res)
 	})
 
@@ -146,6 +143,8 @@ io.on('connection', (socket) => {
 
 	socket.on('roomMessage', (object) => {
 		console.log('new message : '); console.log(object);
+		var room = getRoom(object.room);
+		room.storeMessage(object);
 		io.to(object.room).emit('roomMessageResponse', object);
 	});
 
@@ -170,13 +169,13 @@ server.listen(port, () => {
 function roomExists(roomname) {
 	var res = false;
 	rooms.map((room) => {
-		if (roomname == room.getName()) res = true;
+		if (roomname == room.name) res = true;
 	}); return res;
 }
 
 function getRoom(roomname) {
 	for (var i = 0; i < rooms.length; ++i) {
-		if (roomname == rooms[i].getName()) {
+		if (roomname == rooms[i].name) {
 			return rooms[i];
 		}
 	}; return null;
@@ -185,7 +184,7 @@ function getRoom(roomname) {
 // uses a room object
 function storeRoom(room) {
 	for (var i = 0; i < rooms.length; ++i) {
-		if (room.getName() == rooms[i].getName()) {
+		if (room.name == rooms[i].name) {
 			rooms[i] = room;
 			return true;
 		}
