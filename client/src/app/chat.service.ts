@@ -98,7 +98,8 @@ export class ChatService {
 	public getMessages = () => {
 		return Observable.create((observer) => {
 			this.socket.on('roomMessageResponse', (message) => {
-				observer.next(message.message);
+				observer.next(message);
+				console.log(message)
 			});
 		});
 	}
