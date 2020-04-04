@@ -15,10 +15,8 @@ module.exports = class Room {
 
     this.delimiter = ':;:';
 
-    // this.path = '../logs/' + this.name + '.txt';
-    // this.path = 'logs\\' + this.name + '.txt';
-    let t = this.name + '.txt';
-    this.fileName = path.join('logs', t);   
+    let t = this.name + '.log';
+    this.fileName = path.join('logs', t);
 
     try {
       if (fs.existsSync(this.fileName)) {
@@ -31,11 +29,6 @@ module.exports = class Room {
     } catch (err) {
       console.error(err)
     }
-
-    // var text = 'test:;:test2:;:test3';
-    // console.log(text.split(':;:'))
-
-
   }
 
   getFormattedDate() {
@@ -50,7 +43,7 @@ module.exports = class Room {
     if (mm < 10) { mm = '0' + mm }
     if (minu < 10) { minu = '0' + minu }
 
-    return dd + '/' + mm + '/' + yyyy + ' - ' + hour + ':' + minu;
+    return dd + '/' + mm + '/' + yyyy + '-' + hour + ':' + minu;
   }
 
   loadMessagesFromFile() {
@@ -59,8 +52,7 @@ module.exports = class Room {
 
   storeMessage(object) {
     var time = this.getFormattedDate();
-    var hour = new Date().toISOString().match(/(\d{2}:){2}\d{2}/)[0];
-    
+
     var line = object.username + this.delimiter + object.message + this.delimiter + time + '\n';
     fs.appendFile(this.fileName, line, function (err) {
       if (err) throw err;

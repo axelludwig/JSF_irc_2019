@@ -68,7 +68,6 @@ io.on('connection', (socket) => {
 	})
 
 	socket.on('createRoom', (roomname) => {
-		console.log('appel')
 		var r = new Room(roomname);
 		rooms.push(r);
 		io.emit('addRoom', roomname);
@@ -79,21 +78,20 @@ io.on('connection', (socket) => {
 	socket.on('deleteRoom', (roomname) => {
 		var cpt = 0;
 		for (var i = rooms.length - 1; i >= 0; i--) {
-			
+
 			if (rooms[i].name === roomname) {
 				rooms.splice(i, 1);
 				cpt++;
 			}
 		}
-		if (cpt === 0){
-			 io.emit('deleteRoomError', 'room doesn\'t exist ')
-			 console.log("delete fail")
+		if (cpt === 0) {
+			io.emit('deleteRoomError', 'room doesn\'t exist ')
+			console.log("delete fail")
 		}
 		else {
 			io.emit('deletRoomSucces', roomname);
-			console.log("deleted")
-		} 
-		console.log(rooms);
+			console.log(roomname + " deleted")
+		}
 
 	})
 
@@ -106,10 +104,11 @@ io.on('connection', (socket) => {
 			}
 		}
 		if (cpt === 0) {
-			io.emit('modifyRoomError', 'room doesn\'t exist ')
+			io.emit('modifyRoomError', 'room doesn\'t exist ');
 		}
 		else {
-			io.emit('modifyRoomSucces', roomname, newName)
+			console.log('room ' + roomname + ' changed to ' + newName);
+			io.emit('modifyRoomSucces', roomname, newName);
 		}
 	})
 
@@ -122,8 +121,8 @@ io.on('connection', (socket) => {
 			socket.join(roomname);
 
 		}
+		console.log(user.name + ' joinded ' + roomname)
 		socket.emit('joinRoomResponse', res, roomname);
-		console.log(roomname);
 	})
 
 	socket.on('leaveRoom', (roomname) => {
@@ -134,7 +133,9 @@ io.on('connection', (socket) => {
 			res = true;
 			socket.leave(roomname);
 
-		}; socket.emit('joinRoomResponse', res)
+		};
+		console.log(user.name + ' left ' + roomname)
+		socket.emit('joinRoomResponse', res)
 	})
 
 
