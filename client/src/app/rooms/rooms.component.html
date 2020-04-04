@@ -1,7 +1,9 @@
 
 <ul class="list-unstyled"> 
     <li *ngFor="let room of rooms">
-      {{room.name}}
+      {{room.name}} 
+      <button (click) = "joinRoom(room.name)"><span class="glyphicon glyphicon-log-in"></span></button>
+        <button (click) = "deleteRoom(room.name)"><span class="glyphicon glyphicon-remove"></span></button>
     </li>
 </ul>
 <form >
