@@ -1,12 +1,13 @@
 
 <ul class="list-unstyled"> 
     <li *ngFor="let room of rooms">
-      {{room.name}} 
-      <button (click) = "joinRoom(room.name)"><span class="glyphicon glyphicon-log-in"></span></button>
+        {{room.name}} 
+        <button (click) = "joinRoom(room.name)"><span class="glyphicon glyphicon-log-in"></span></button>
         <button (click) = "deleteRoom(room.name)"><span class="glyphicon glyphicon-remove"></span></button>
+
     </li>
 </ul>
 <form >
     <input  #name type="text" class="form-control" placeholder="room name" required="required">
-    <button (click)="createRoom(name.value)">create</button>
+    <button (click)="createRoom(name.value); name.value=''">create</button>
 </form>

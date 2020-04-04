@@ -50,13 +50,14 @@ export class RoomsComponent implements OnInit {
   modifyRoom(roomname, newName) {
     if (roomname == "") alert("choose a username")
     else {
-      this.chatService.socket.emit('roomnameIsAvailable', roomname);
-      this.chatService.socket.on('roomnameIsAvailableResponse', (isAvailable) => {
-        if (isAvailable) this.chatService.socket.emit('modifyRoom', roomname, newName);
-        else alert("this roomname is already taken")
-      })
-    } return;
-  }
+        var available = true;
+        this.rooms.map((n) => { if (roomname == n.name) available = false; });
+        if (available) {
+          this.chatService.socket.emit('modifyRoom', roomname, newName);
+        } else
+            alert("this roomname is already taken")
+      }
+    } 
 
   joinRoom(roomname) {
     this.chatService.socket.emit('joinRoom',roomname);

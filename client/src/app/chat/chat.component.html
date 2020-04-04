@@ -4,8 +4,59 @@
 			<app-rooms></app-rooms>
 		</div>
 
-		<div class = "col-sm-6">
-			<div class="messages">
+		<div class = "col-sm-9">
+			<div class="mesgs">
+				<div class="msg_history">
+				  <li class="message" *ngFor="let message of messages">
+					<div
+					  *ngIf="
+						username !== message.username;
+						then incoming_msg;
+						else outgoing_msg
+					  "
+					></div>
+					<ng-template #incoming_msg>
+					  <div class="incoming_msg">
+						<div class="incoming_msg_img">
+						  <img
+							src="https://i.imgur.com/k2PZLZa.png"
+							alt="User avatar"
+						  />
+						</div>
+						<div class="received_msg">
+						  <div class="received_withd_msg">
+							<p>{{ message.message }}</p>
+						  </div>
+						</div>
+					  </div>
+					</ng-template>
+					<ng-template #outgoing_msg>
+					  <div class="outgoing_msg">
+						<div class="sent_msg">
+						  <p>{{ message.message }}</p>
+						</div>
+					  </div>
+					</ng-template>
+				  </li>
+				</div>
+				<div class="form">
+					<form >
+						<input
+						  type="text"
+						  placeholder="Type a message"
+						  name="newMessage"
+						  [(ngModel)]="message"
+						  #input
+						  (keyup)="$event.keyCode == 13 && sendMessage() ;onKey($event)"
+						/>
+						<button type="button"  (click)="sendMessage(); input.value=''">
+						 send
+						</button>
+					</form>
+				
+				</div>
+			  </div>
+			<!-- <div class="messages">
 				<div *ngFor="let message of messages">
 					{{message}}
 				</div>
@@ -13,15 +64,11 @@
 			
 				</div>
 				<div class="form">
-					<input [(ngModel)]="message" (keyup)="$event.keyCode == 13 && sendMessage()" />
-					<button (click)="sendMessage()">Send</button>
-					<!-- <button (click)="joinRoom(roomname.value)"> test button : join room</button>
-					<button (click)="test2()"> test2 button </button>
-					<input #roomname type="text">
-					<button (click)="createRoom(roomname.value)"> create room </button> -->
+					<input [(ngModel)]="message" (keyup)="$event.keyCode == 13 && sendMessage()" #value/>
+					<button (click)="sendMessage(); value.value=''">Send</button>
 			
 				</div>
-			</div>
+			</div> -->
 		</div>
 		
 		<div class = "col-sm-3">
