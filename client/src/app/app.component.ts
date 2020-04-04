@@ -35,6 +35,10 @@ export class AppComponent {
   }
 
   ngOnInit() {
+
+    // //debug
+    // this.username = 'debug'
+
     this.getUsers();
 
     this.chatService

@@ -1,12 +1,16 @@
-
-<ul class="list-unstyled"> 
-    <li *ngFor="let room of rooms">
-      {{room.name}} 
-      <button (click) = "joinRoom(room.name)"><span class="glyphicon glyphicon-log-in"></span></button>
-        <button (click) = "deleteRoom(room.name)"><span class="glyphicon glyphicon-remove"></span></button>
-    </li>
-</ul>
-<form >
-    <input  #name type="text" class="form-control" placeholder="room name" required="required">
-    <button (click)="createRoom(name.value)">create</button>
-</form>
+<div class="roomsPanel">
+    <h1>Channels</h1>
+    <ul class="list-unstyled">
+        <li *ngFor="let room of rooms" [class.selected]="room.name === selectedRoom">
+            <p>{{room.name}} </p>
+            <div class="buttons">
+                <button (click)="roomClick(room.name)"><span class="glyphicon glyphicon-log-in"></span></button>
+                <button (click)="deleteRoom(room.name)"><span class="glyphicon glyphicon-remove"></span></button>
+            </div>
+        </li>
+    </ul>
+    <form>
+        <input #name type="text" class="form-control" placeholder="room name" required="required">
+        <button (click)="createRoom(name.value)">create</button>
+    </form>
+</div>

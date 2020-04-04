@@ -1,16 +1,18 @@
-<div class = "container">
-	<div class = "row">
-		<div class = "col-sm-3">
-			<app-rooms></app-rooms>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-4">
+			<app-rooms>
+
+			</app-rooms>
 		</div>
 
-		<div class = "col-sm-6">
+		<div class="col-sm-6">
 			<div class="messages">
 				<div *ngFor="let message of messages">
 					{{message}}
 				</div>
 				<div>
-			
+
 				</div>
 				<div class="form">
 					<input [(ngModel)]="message" (keyup)="$event.keyCode == 13 && sendMessage()" />
@@ -19,12 +21,12 @@
 					<button (click)="test2()"> test2 button </button>
 					<input #roomname type="text">
 					<button (click)="createRoom(roomname.value)"> create room </button> -->
-			
+
 				</div>
 			</div>
 		</div>
-		
-		<div class = "col-sm-3">
+
+		<div class="col-sm-3">
 
 		</div>
 	</div>

@@ -113,6 +113,7 @@ io.on('connection', (socket) => {
 	})
 
 	socket.on('joinRoom', (roomname) => {
+		if (!user) return;
 		var res = false;
 		if (roomExists(roomname)) {
 			var r = getRoom(roomname);
