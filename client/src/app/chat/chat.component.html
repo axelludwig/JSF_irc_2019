@@ -19,14 +19,15 @@
 					></div>
 					<ng-template #incoming_msg>
 					  <div class="incoming_msg">
-						<div class="incoming_msg_img">
+						<!-- <div class="incoming_msg_img">
 						  <img
 							src="https://i.imgur.com/k2PZLZa.png"
 							alt="User avatar"
 						  />
-						</div>
+						</div> -->
 						<div class="received_msg">
 						  <div class="received_withd_msg">
+							<span>{{message.time }}: {{ message.username}} :</span>
 							<p>{{ message.message }}</p>
 						  </div>
 						</div>
@@ -35,6 +36,7 @@
 					<ng-template #outgoing_msg>
 					  <div class="outgoing_msg">
 						<div class="sent_msg">
+							<span>{{message.time }}: me :</span>
 						  <p>{{ message.message }}</p>
 						</div>
 					  </div>

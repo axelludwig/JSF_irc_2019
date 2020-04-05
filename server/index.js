@@ -147,7 +147,13 @@ io.on('connection', (socket) => {
 		console.log('new message : '); console.log(object);
 		var room = getRoom(object.room);
 		room.storeMessage(object);
-		io.to(object.room).emit('roomMessageResponse', object);
+		var o ={
+			message: object.message,
+			room: object.room,
+			username: object.username,
+			time: room.getFormattedDate()
+		}
+		io.to(object.room).emit('roomMessageResponse', o);
 	});
 
 

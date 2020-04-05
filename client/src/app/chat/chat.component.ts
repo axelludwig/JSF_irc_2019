@@ -17,13 +17,10 @@ export class ChatComponent implements OnInit {
 	messageUser: string;
 	username: string;
 	o_message:Message ;
-	today= new Date();
-  	todaysDataTime = '';
-
 	constructor(private chatService: ChatService) {
 		
 		this.username = this.chatService.username;
-		this.todaysDataTime = formatDate(this.today, 'dd-MM-yyyy hh:mm:ss a', 'fr-FR', '+0200');
+
 	}
 
 	sendMessage() {
@@ -69,13 +66,16 @@ export class ChatComponent implements OnInit {
 			.getMessages()
 			.subscribe((message) => {
 				
-				this.o_message = {username : message.username, message: message.message}
+				this.o_message = {username : message.username, message: message.message, time: message.time}
 				this.messages.push(this.o_message);
+				
 				// this.messageUser = message.username;
 				// console.log(this.username);
 				// console.log(this.messageUser);
 			});	
 		this.chatService.joinRoom().subscribe(() =>{
+			if(this.room != this.chatService.room)
+				this.messages = [];
 			this.room = this.chatService.room;
 			console.log(this.room);
 		})
