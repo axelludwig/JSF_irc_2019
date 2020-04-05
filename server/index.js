@@ -127,15 +127,24 @@ io.on('connection', (socket) => {
 	socket.on('joinRoom', (roomname) => {
 		if (!user) return;
 		var res = false;
+		var r
 		if (roomExists(roomname)) {
-			var r = getRoom(roomname);
+			r = getRoom(roomname);
 			r.addUser(user);
 			res = true;
 			socket.join(roomname);
 
 		}
+		var message = ' welcome ' + user.name + ' joinded ' + roomname;
+		var o ={
+			message: message,
+			room: roomname,
+			username: "system",
+			time: r.getFormattedDate()
+		}
 		console.log(user.name + ' joinded ' + roomname)
 		socket.emit('joinRoomResponse', res, roomname);
+		io.to(roomname).emit('roomMessageResponse', o);
 	})
 
 	socket.on('leaveRoom', (roomname) => {
@@ -147,8 +156,16 @@ io.on('connection', (socket) => {
 			socket.leave(roomname);
 
 		};
+		var message = user.name + ' left ' + roomname;
+		var o ={
+			message: message,
+			room: roomname,
+			username: "system",
+			time: r.getFormattedDate()
+		}
 		console.log(user.name + ' left ' + roomname)
 		socket.emit('joinRoomResponse', res)
+		io.to(roomname).emit('roomMessageResponse', o);
 	})
 
 
