@@ -17,6 +17,7 @@ export class ChatComponent implements OnInit {
 	messageUser: string;
 	username: string;
 	o_message:Message ;
+	time:string;
 	constructor(private chatService: ChatService) {
 		
 		this.username = this.chatService.username;
@@ -68,7 +69,6 @@ export class ChatComponent implements OnInit {
 				
 				this.o_message = {username : message.username, message: message.message, time: message.time}
 				this.messages.push(this.o_message);
-				
 				// this.messageUser = message.username;
 				// console.log(this.username);
 				// console.log(this.messageUser);
