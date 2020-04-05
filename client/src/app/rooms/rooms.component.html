@@ -1,16 +1,25 @@
 <div class="roomsPanel">
-    <h1>Channels</h1>
-    <ul class="list-unstyled">
-        <li *ngFor="let room of rooms" [class.selected]="room.name === selectedRoom">
-            <p>{{room.name}} </p>
-            <div class="buttons">
-                <button (click)="roomClick(room.name)"><span class="glyphicon glyphicon-log-in"></span></button>
-                <button (click)="deleteRoom(room.name)"><span class="glyphicon glyphicon-remove"></span></button>
-            </div>
-        </li>
-    </ul>
-    <form>
-        <input #name type="text" class="form-control" placeholder="room name" required="required">
-        <button (click)="createRoom(name.value)">create</button>
-    </form>
+    <h2>Channels</h2>
+    <div class="list">  
+        <ul >
+            <li *ngFor="let room of rooms" [class.selected]="room.name === selectedRoom">
+                <p>{{room.name}} </p>
+                <div class="buttons">
+                    <button (click)="roomClick(room.name)"><span class="glyphicon glyphicon-log-in"></span></button>
+                    <button (click)="deleteRoom(room.name)"><span class="glyphicon glyphicon-remove"></span></button>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <h4> Create a new Room </h4>
+
+    <div class="create">
+        <form>
+            <input #name type="text" class="form-control" placeholder="room name" required="required">
+            <button class="createButton btn btn-primary btn-block " (click)="createRoom(name.value)"> Create a new room
+            </button>
+
+        </form>
+    </div>
 </div>

@@ -1,62 +1,87 @@
+.text-center {
+    color: white;
+}
+
+h3 {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    color: white;
+}
+
 .login-form {
     width: 500px;
     height: 500px;
     margin: 120px auto;
 }
+
 .login-form form {
     margin-top: 40%;
-    background: #f7f7f7;
+    background: #303030;
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
     padding: 40px;
 }
+
 .login-form h2 {
-    margin-top:0px ;
+    margin-top: 0px;
     margin-bottom: 40px;
 }
+
 .form-control, .btn {
     min-height: 38px;
     border-radius: 2px;
 }
+
 .btn {
-    margin-top: 20px;        
+    margin-top: 20px;
     font-size: 15px;
     font-weight: bold;
     /* background-color: red !important; */
-        
     /* color: green; */
 }
+
 .single {
     padding: 30px 15px;
     margin-top: 40px;
     background: #fcfcfc;
-    border: 1px solid #f0f0f0; }
-    .single h3.side-title {
+    /* border: 1px solid #f0f0f0; */
+}
+
+.single h3.side-title {
     margin: 0;
     margin-bottom: 10px;
     padding: 0;
     font-size: 20px;
     color: #333;
-    text-transform: uppercase; 
+    text-transform: uppercase;
 }
-    .single h3.side-title:after {
+
+.single h3.side-title:after {
     content: '';
     width: 200px;
     height: 1px;
     background: #0f9def;
     display: block;
-    margin-top: 6px; }
-    
-    .single ul {
-    margin-bottom: 0; }
-    .single li a {
+    margin-top: 6px;
+}
+
+.single ul {
+    margin-bottom: 0;
+}
+
+.single li a {
     color: #666;
     font-size: 14px;
     text-transform: uppercase;
     border-bottom: 1px solid #f0f0f0;
     line-height: 40px;
     display: block;
-    text-decoration: none; }
-    .single li a:hover {
-    color: #ff173c; }
-    .single li:last-child a {
-    border-bottom: 0; }
+    text-decoration: none;
+}
+
+.single li a:hover {
+    color: #ff173c;
+}
+
+.single li:last-child a {
+    border-bottom: 0;
+}

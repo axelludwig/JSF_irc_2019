@@ -1,5 +1,5 @@
 .roomsPanel {
-    margin: 100px 0px 0px 20px;
+    margin: 100px 20px 0px 20px;
     display: block;
     height: auto;
     width: auto;
@@ -7,30 +7,36 @@
     border: 10px;
     /* border: solid red; */
     /* overflow: hidden; */
-    background: #f7f7f7;
+    background: #303030;
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
     text-align: center;
 }
 
-h1 {
+h2 {
     /* margin: 0px 20px 20px 105px; */
     /* margin-bottom: 10px; */
-    padding: 10px 0px 0px 0px;
+    padding: 30px 0px 15px 0px;
+    color: white;
+}
+
+.list {
+    /* margin: ; */
 }
 
 ul {
-    padding: 0px 10px 10px 10px;
-    margin: 0px;
-
+    padding: 0 0 0 0;
+    margin: 0px 20px 0px 20px;
     /* width: 100px;
     height: 200px; */
+    /* background-color: red;
+    border-radius: 10px;
+    border: 1px solid #73AD21; */
+    background: #fcfcfc;
 }
 
 li {
     text-align: center;
-    /* display: flex; */
     height: 40px;
-    /* border: solid green 1px; */
     display: flex;
     background: #fcfcfc;
 }
@@ -46,24 +52,47 @@ p {
 
 .buttons {
     position: absolute;
-    right: 10px;
+    right: 40px;
+}
+
+.create {
+    padding: 0 0px 0 0;
+    width: 90%;
+    display: inline-block;
+    margin: 0px 10px 30px 10px;
+    /* margin-right: 20px !important; */
+}
+
+.createButton {
+    /* margin-right: 20px; */
+    margin: 0;
+    /* width: auto !important; */
+    width: 100%;
 }
 
 button {
-    margin: 7px 5px 5px 5px;
-    /* float:right; */
-    /* height: 20px; */
-    background: none;
-    color: inherit;
-    /* border: none; */
-    /* padding: 0; */
-    /* font: inherit; */
-    /* cursor: pointer; */
-    /* outline: inherit; */
-    border: solid red 1px;
+    margin: 7px 5px 7px 5px;
+    /* background: none; */
+    /* color: inherit; */
+    /* border: solid #337ab7 1px; */
+}
+
+h4 {
+    margin-top: 30px;
+    margin-bottom: 15px;
+    color: white;
+}
+
+.form-control {
+    margin-bottom: 10px;
+}
+
+form {
+    margin: 0;
+    padding: 0;
 }
 
 .selected {
-    /* border-radius: 10px; */
-    border: 2px solid #0f9def;
+    /* border-radius: 5px; */
+    border: 3px solid #3ab6fd;
 }
