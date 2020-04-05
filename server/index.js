@@ -101,20 +101,26 @@ io.on('connection', (socket) => {
 
 	})
 
-	socket.on('modifyRoom', (roomname, newName) => {
+	socket.on('modifyRoom', (objet) => {
+		console.log("recu")
 		var cpt = 0;
-		for (var i = r.length - 1; i >= 0; i--) {
-			if (r[i].name == roomname) {
-				r[i].name = newName;
+		var index;
+		console.log(objet);
+		for (var i = rooms.length - 1; i >= 0; i--) {
+			console.log("here")
+			if (rooms[i].name == objet.rn) {
+				index = i;
 				cpt++;
 			}
 		}
+		console.log(cpt);
 		if (cpt === 0) {
+			console.log("fail")
 			io.emit('modifyRoomError', 'room doesn\'t exist ');
 		}
 		else {
-			console.log('room ' + roomname + ' changed to ' + newName);
-			io.emit('modifyRoomSucces', roomname, newName);
+			rooms[index].changeName(objet.nn);
+			io.emit('modifyRoomSucces', objet);
 		}
 	})
 

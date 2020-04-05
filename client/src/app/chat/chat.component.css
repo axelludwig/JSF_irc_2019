@@ -17,7 +17,6 @@
 
 .form input {
 	border: none;
-	
 	display: inline-flex;
 	/* height: auto; */
 	width: 75%;
@@ -27,7 +26,7 @@
 	margin-right: .5%; */
 	border-radius: 0 !important;
 	margin: 0px;
-	padding: 0px;
+	padding: 0px 0px 0px 10px;
 	/* margin-top: 2px; */
 }
 
@@ -45,9 +44,7 @@
 	/* padding: 10px 10px 10px 10px; */
 	text-align: center;
 	align-content: center;
-
 }
-
 
 #messages {
 	list-style-type: none;
@@ -56,6 +53,7 @@
 }
 
 #messages li {
+	margin: 10px 0px 10px 0px;
 	padding: 5px 10px;
 }
 
@@ -77,28 +75,24 @@ img {
 	max-width: 100%;
 }
 
+.outgoing_msg {
+	overflow: hidden;
+	margin: 15px 10px 15px 10px;
+	/* margin: 26px 0 26px; */
+}
+
+.incoming_msg {
+	overflow: hidden;
+	margin: 15px 10px 15px 10px;
+}
+
 .incoming_msg_img {
-	display: inline-block;
-	width: 6%;
+	/* display: inline-block;
+	width: 6%; */
+	overflow: hidden;
+	margin: 15px 10px 15px 10px;
 }
 
-.received_msg {
-	display: inline-block;
-	padding: 0 0 0 10px;
-	vertical-align: top;
-	width: 55%;
-	height: auto;
-}
-
-.received_withd_msg p {
-	background: #ebebeb none repeat scroll 0 0;
-	border-radius: 3px;
-	color: #646464;
-	font-size: 14px;
-	margin-left: 5px;
-	padding: 5px 10px 5px 12px;
-	width: 97%;
-}
 
 .msg_history {
 	margin: 0px 2px 0px 2px;
@@ -121,8 +115,42 @@ img {
 	/* width: 100%; */
 }
 
+#second {
+	float: right;
+	margin-right: 15px;
+}
+
+.received_msg {
+	/* display: inline-block;
+	padding: 0 0 0 10px;
+	vertical-align: top;
+	width: 55%;
+	height: auto; */
+	float: left;
+	width: 55%;
+	/* background: #fcfcfc; */
+}
+
+.received_withd_msg p {
+	background: #ebebeb none repeat scroll 0 0;
+	border-radius: 3px;
+	color: #646464;
+	font-size: 14px;
+	margin-left: 5px;
+	padding: 5px 10px 5px 12px;
+	width: 97%;
+
+	border-radius: 3px;
+	font-size: 14px;
+	right: 5px;
+	padding: 5px 12px 5px 10px;
+	width: 97%;
+	
+}
+
+
 .sent_msg p {
-	background: #05728f none repeat scroll 0 0;
+	background: #337ab7 none repeat scroll 0 0;
 	border-radius: 3px;
 	font-size: 14px;
 	right: 5px;
@@ -131,16 +159,9 @@ img {
 	width: 97%;
 }
 
-.outgoing_msg {
-	overflow: hidden;
-	margin-bottom: 10px 0px 10px 0px;
-	/* margin: 26px 0 26px; */
-}
-
 .sent_msg {
 	float: right;
 	width: 55%;
-	background: #fcfcfc;
 }
 
 .input_msg_write input {
@@ -158,7 +179,7 @@ img {
 }
 
 .msg_send_btn {
-	background: #05728f none repeat scroll 0 0;
+	background: #337ab7 none repeat scroll 0 0;
 	border: medium none;
 	border-radius: 50%;
 	color: #fff;

@@ -19,7 +19,8 @@
 							<div class="incoming_msg">
 								<div class="received_msg">
 									<div class="received_withd_msg">
-										<span>[{{message.time }}] {{ message.username}} said </span>
+										<span style="margin-left: 5px;"> {{ message.username}} said </span>
+										<span id="second"> {{message.time }}</span>
 										<p>{{ message.message }}</p>
 									</div>
 								</div>
@@ -29,6 +30,7 @@
 							<div class="outgoing_msg">
 								<div class="sent_msg">
 									<span> You said </span>
+									<span id="second"> {{message.time }}</span>
 									<p>{{ message.message }}</p>
 								</div>
 							</div>
@@ -37,8 +39,9 @@
 				</div>
 				<div class="form">
 					<form>
-						<input id="input" #name type="text" class="form-control input-lg" type="text" placeholder="Type a message" name="newMessage"
-						[(ngModel)]="message" #input (keyup)="$event.keyCode == 13 && sendMessage();">
+						<input id="input" #name type="text" class="form-control input-lg" type="text"
+							placeholder="Type a message" name="newMessage" [(ngModel)]="message" #input
+							(keyup)="$event.keyCode == 13 && sendMessage();">
 						<button (click)="sendMessage();" type="button" class="btn btn-primary btn-lg">Send</button>
 					</form>
 

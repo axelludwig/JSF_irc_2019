@@ -5,6 +5,8 @@
             <li *ngFor="let room of rooms" [class.selected]="room.name === selectedRoom">
                 <p>{{room.name}} </p>
                 <div class="buttons">
+                    
+                    <button data-toggle="tooltip" data-placement="top" title="change this name" (click)="modifyRoom(room.name)"><span class="glyphicon glyphicon-pencil"></span></button>
                     <button data-toggle="tooltip" data-placement="top" title="Join this channel" (click)="roomClick(room.name)"><span class="glyphicon glyphicon-log-in"></span></button>
                     <button data-toggle="tooltip" data-placement="top" title="Delete this channel" (click)="deleteRoom(room.name)"><span class="glyphicon glyphicon-remove"></span></button>
                 </div>
