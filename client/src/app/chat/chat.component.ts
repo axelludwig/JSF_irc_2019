@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ChatService } from '../chat.service';
 import {Message} from '../message'
+import {formatDate } from '@angular/common';
+
 
 @Component({
 	selector: 'app-chat',
@@ -15,10 +17,13 @@ export class ChatComponent implements OnInit {
 	messageUser: string;
 	username: string;
 	o_message:Message ;
+	today= new Date();
+  	todaysDataTime = '';
 
 	constructor(private chatService: ChatService) {
 		
 		this.username = this.chatService.username;
+		this.todaysDataTime = formatDate(this.today, 'dd-MM-yyyy hh:mm:ss a', 'fr-FR', '+0200');
 	}
 
 	sendMessage() {
