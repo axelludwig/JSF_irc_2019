@@ -5,6 +5,7 @@
             <li *ngFor="let room of rooms" [class.selected]="room.name === selectedRoom">
                 <p>{{room.name}} </p>
                 <div class="buttons">
+                    <button (click)="modifyRoom(room.name)"><span class="glyphicon glyphicon-pencil"></span></button>
                     <button (click)="roomClick(room.name)"><span class="glyphicon glyphicon-log-in"></span></button>
                     <button (click)="deleteRoom(room.name)"><span class="glyphicon glyphicon-remove"></span></button>
                 </div>

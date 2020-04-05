@@ -70,13 +70,21 @@ export class RoomsComponent implements OnInit {
     this.chatService.deleteRoom(roomname);
   }
 
-  modifyRoom(roomname, newName) {
+  modifyRoom(roomname) {
     if (roomname == "") alert("choose a username")
     else {
+        var newName :any  = prompt("enter a newname ")
+        console.log(newName)
         var available = true;
-        this.rooms.map((n) => { if (roomname == n.name) available = false; });
+        this.rooms.map((n) => { if (newName == n.name) available = false; });
         if (available) {
-          this.chatService.socket.emit('modifyRoom', roomname, newName);
+          var objet = {
+            rn: roomname,
+            nn: newName
+            }
+          this.chatService.socket.emit('modifyRoom', objet);
+          console.log(objet);
+          
         } else
             alert("this roomname is already taken")
       }
