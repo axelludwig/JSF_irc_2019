@@ -18,6 +18,12 @@ var r = new Room('room1');
 rooms.push(r);
 r = new Room('room2');
 rooms.push(r);
+r = new Room('room3');
+rooms.push(r);
+r = new Room('room4');
+rooms.push(r);
+r = new Room('room5');
+rooms.push(r);
 usersController.saveUsername('axel');
 usersController.saveUsername('peng');
 

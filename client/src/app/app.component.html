@@ -4,31 +4,36 @@
 </div>
 
 <ng-template #elseBlock>
- 
-    
-      <div class="login-form">
-        <form >
-          <h2 class="text-center">Join the chat</h2>       
-          <div class="form-group">
-              <input #name type="text" class="form-control" placeholder="Username" required="required">
-          </div>
-          <div class="form-group">
-              <button (click)="saveUsername(name.value)" class="btn btn-primary btn-block">save your name</button>
-          </div>
-          <div class="single category">
-            <h3 class="side-title">Online users : {{users.length}}</h3>
-            <ul class="list-unstyled"> 
-              <li *ngFor="let user of users">
-                {{user.name}}
-              </li>
-            </ul>
-          </div> 
-        </form> 
-      
-        
+
+
+  <div class="login-form">
+    <form>
+
+      <h1 class="text-center">IRC Chat</h1>
+      <h3> Choose a username and join the chat ! </h3>
+
+      <div class="form-group">
+        <input #name type="text" class="form-control" placeholder="Username" required="required">
       </div>
+      <div class="form-group">
+        <button (click)="saveUsername(name.value)" class="btn btn-primary btn-block"> Choose this name </button>
+      </div>
+      <div class="single category">
+        <h3 class="side-title">Online users : {{users.length}}</h3>
+        <ul class="list-unstyled">
+          <li *ngFor="let user of users">
+            <p class="roomName">
+              {{user.name}}
+            </p>
+          </li>
+        </ul>
+      </div>
+    </form>
+
+
+  </div>
 
 
 
- 
+
 </ng-template>

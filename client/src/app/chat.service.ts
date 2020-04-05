@@ -81,10 +81,9 @@ export class ChatService {
 	}
 
 	public joinRoom = () => {
-		console.log('ici')
 		return Observable.create((observer) => {
 			this.socket.on('joinRoomResponse', (response, roomname) => {
-				console.log('connected to ' + roomname)
+				// console.log('connected to ' + roomname)
 				this.room = roomname;
 				observer.next(roomname);
 				})
