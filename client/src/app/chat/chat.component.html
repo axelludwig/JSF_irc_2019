@@ -19,7 +19,7 @@
 							<div class="incoming_msg">
 								<div class="received_msg">
 									<div class="received_withd_msg">
-										<span>{{message.time }}: {{ message.username}} :</span>
+										<span>[{{message.time }}] {{ message.username}} said </span>
 										<p>{{ message.message }}</p>
 									</div>
 								</div>
@@ -28,7 +28,7 @@
 						<ng-template #outgoing_msg>
 							<div class="outgoing_msg">
 								<div class="sent_msg">
-									<span>{{message.time }}: me :</span>
+									<span> You said </span>
 									<p>{{ message.message }}</p>
 								</div>
 							</div>
@@ -37,11 +37,9 @@
 				</div>
 				<div class="form">
 					<form>
-						<input id="input" type="text" placeholder="Type a message" name="newMessage"
-							[(ngModel)]="message" #input (keyup)="$event.keyCode == 13 && sendMessage();" />
-						<button type="button" (click)="sendMessage();">
-							send
-						</button>
+						<input id="input" #name type="text" class="form-control input-lg" type="text" placeholder="Type a message" name="newMessage"
+						[(ngModel)]="message" #input (keyup)="$event.keyCode == 13 && sendMessage();">
+						<button (click)="sendMessage();" type="button" class="btn btn-primary btn-lg">Send</button>
 					</form>
 
 				</div>
