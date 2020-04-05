@@ -67,10 +67,10 @@ export class ChatService {
 					type: 'remove'
 				});
 			});
-			this.socket.on('modifyRoomSucces',(room, newName) =>{
+			this.socket.on('modifyRoomSucces',(objet) =>{
 				observer.next({
-					name: room,
-					newName: newName,
+					name: objet.rn,
+					newName: objet.nn,
 					type: 'modify'
 				});
 			})
