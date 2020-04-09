@@ -8,13 +8,15 @@ import { ChatService } from './chat.service';
 import { ChatComponent } from './chat/chat.component';
 import { RoomsComponent } from './rooms/rooms.component';
 import { UsersComponent } from './users/users.component';
+import { RoomsinfoComponent } from './roomsinfo/roomsinfo.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ChatComponent,
     RoomsComponent,
-    UsersComponent
+    UsersComponent,
+    RoomsinfoComponent
   ],
   imports: [
     BrowserModule,

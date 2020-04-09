@@ -25,6 +25,10 @@ export class ChatComponent implements OnInit {
 	}
 
 	sendMessage() {
+		if (!this.room) {
+			alert('join a channel to send a message');
+			return;
+		}
 		var object = {
 			message: this.message,
 			username: this.chatService.username,

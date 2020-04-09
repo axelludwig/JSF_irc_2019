@@ -13,7 +13,7 @@ module.exports = class Room {
     this.messages = [];
     this.id = Math.floor(Math.random() * 1000000);
 
-    this.delimiter = ':;:';
+    this.delimiter = ':';
 
     let t = this.name + '.log';
     this.fileName = path.join('logs', t);
