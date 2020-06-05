@@ -25,7 +25,7 @@ rooms.push(r);
 r = new Room('room5');
 rooms.push(r);
 // usersController.saveUsername('axel');
-usersController.saveUsername('peng');
+// usersController.saveUsername('peng');
 
 const port = process.env.PORT || 3000;
 
